@@ -3,8 +3,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import FixtureSelector from '../FixtureSelector/FixtureSelector.js'
-import './HeaderComponent.css'
+import FixtureSelector from '../FixtureSelector/FixtureSelector.js';
+import './HeaderPage.css'
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-class HeaderComponent extends Component {
+class HeaderPage extends Component {
 
-    HeaderComponent() { }
+    HeaderPage() { }
 
     render() {
         return (<div className={useStyles.root}>
             <AppBar position="static" color="secondary">
                 <Toolbar>
-                    <Typography variant="h5" className={useStyles.title}>
+                    <Typography variant="h6" className={useStyles.title}>
                         Inventory Control
                     </Typography>
                 </Toolbar>
@@ -37,4 +37,4 @@ class HeaderComponent extends Component {
         </div>);
     }
 }
-export default HeaderComponent;
+export default HeaderPage;
