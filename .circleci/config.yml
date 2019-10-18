@@ -1,5 +1,4 @@
-workflows:
-  version: 2
+version: 2
 jobs:
   build:
     branches:
@@ -17,7 +16,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            - "ba:ae:d2:da:e4:53:d8:75:73:91:ee:3a:f3:41:ad:3a"
+            - "cb:9c:ea:dd:4c:30:d6:b6:53:f1:a9:3b:54:fe:f9:1c"
 
       # Download and cache dependencies
       - restore_cache:
