@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) =>
 
 class HeaderPage extends Component {
 
-    HeaderPage() { }
+    constructor(props) {
+        super(props);
+        this.state = {testParam: props.testParam};
+        console.log(this.state);
+    }
 
     render() {
         return (<div className={useStyles.root}>
