@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/inventory-control">
       <div>
         <Route exact path="/" component={HeaderPage} />
         <Route path="/start" component={StartPage} />
