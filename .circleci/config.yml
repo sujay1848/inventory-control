@@ -1,4 +1,5 @@
-version: 2
+workflows:
+  version: 2
 jobs:
   build:
     branches:
@@ -6,6 +7,7 @@ jobs:
         - development
       ignore:
         - gh-pages
+        - master
     docker:
       - image: circleci/node:9.9.0
     working_directory: ~/repo
