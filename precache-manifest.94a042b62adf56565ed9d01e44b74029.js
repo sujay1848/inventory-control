@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "88b35d32174ef5667904d02b71505f3f",
+    "revision": "bc58adb48c4d9e6a9d814bd7359ace0b",
     "url": "/inventory-control/index.html"
   },
   {
