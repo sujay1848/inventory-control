@@ -37,6 +37,7 @@ class ConnectedHeaderPage extends Component {
         this.state = { fixtureId: null };
         this.handleFixtureIdChange = this.handleFixtureIdChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.isButtonDisabled = this.isButtonDisabled.bind(this);
     }
 
     handleFixtureIdChange(event) {
@@ -47,6 +48,10 @@ class ConnectedHeaderPage extends Component {
         const { fixtureId } = this.state;
         this.props.scanFixture({ fixtureId });
         this.setState({ fixtureId: "" });
+    }
+
+    isButtonDisabled() {
+        return !this.state.fixtureId;
     }
 
     render() {
@@ -66,7 +71,11 @@ class ConnectedHeaderPage extends Component {
                     variant="outlined"
                     onChange={this.handleFixtureIdChange}
                 />
-                <Link to="/start"><Button variant="contained" color="secondary" onClick={this.handleSubmit}>Proceed</Button></Link >
+                <Link to="/start" style={{ textDecoration: 'none' }}>
+                    <Button disabled={this.isButtonDisabled()} style={{ width: '100%' }} fullWidth={true} variant="contained" color="secondary" onClick={this.handleSubmit}>
+                        Proceed
+                    </Button>
+                </Link >
             </div>
         </div>);
     }

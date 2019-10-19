@@ -12,32 +12,36 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             flexGrow: 1
-        },
-        menuButton: {
-            marginRight: theme.spacing(3),
-        },
-        title: {
-            flexGrow: 1,
-        },
-    }),
+        }
+    })
 );
 
 const mapStateToProps = state => {
     return { fixtureId: state.fixtureId };
 };
 
-const ConnectedCountStartPage = ({ fixtureId }) => {
+const ConnectedCountStartPage = ({ fixtureId, enableCounting }) => {
     return (<div className={useStyles.root}>
         <AppBar position="static" color="secondary">
             <Toolbar>
-                <Typography variant="h6" className={useStyles.title}>
-                    Inventory Control - Start
+                <Typography variant="h6">
+                    Inventory Control
                     </Typography>
             </Toolbar>
         </AppBar>
-        <h5>Start page.</h5>
-        <h5>Fixture ID: {fixtureId}</h5>
-        <Link to="/"><Button variant="contained" color="secondary">Back to Home</Button></Link >
+        <Typography variant="overline" style={{ fontSize: 21, margin: 10, marginBottom: 0, textTransform: 'uppercase' }} >Fixture ID:
+        <Typography variant="overline" style={{ fontSize: 21, margin: 10, marginBottom: 0, textDecoration: 'underline' }} >{fixtureId}</Typography>
+        </Typography>
+        <div id="buttonWrapper" style={{ display: 'flex-vertical', flexGrow: 2, margin: 10 }}>
+            <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" >
+                Start Scanning
+            </Button>
+            <Link to="/" style={{ textDecoration: 'none' }}>
+                <Button style={{ width: '100%' }} variant="contained" color="secondary">
+                    Back to Home
+            </Button>
+            </Link >
+        </div>
     </div>);
 }
 const CountStartPage = connect(mapStateToProps)(ConnectedCountStartPage);

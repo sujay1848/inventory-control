@@ -2,11 +2,12 @@
     color: white;
 }
 
-.colorPrimary {
-    color: #c03724;
-}
-
 .container {
     display: flex;
     flex-direction: column;
+    margin: 10px;
+}
+
+.link {
+    text-decoration: 'none'
 }
