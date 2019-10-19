@@ -5,3 +5,8 @@
 .colorPrimary {
     color: #c03724;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -6,6 +6,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import './CountStartPage.css'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -21,26 +22,23 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
-class StartPage extends Component {
+const mapStateToProps = state => {
+    return { fixtureId: state.fixtureId };
+};
 
-    StartPage() { }
-
-    getName() {
-        return 'My name is start page.';
-    }
-
-    render() {
-        return (<div className={useStyles.root}>
-            <AppBar position="static" color="secondary">
-                <Toolbar>
-                    <Typography variant="h6" className={useStyles.title}>
-                        Inventory Control - Start
+const ConnectedCountStartPage = ({ fixtureId }) => {
+    return (<div className={useStyles.root}>
+        <AppBar position="static" color="secondary">
+            <Toolbar>
+                <Typography variant="h6" className={useStyles.title}>
+                    Inventory Control - Start
                     </Typography>
-                </Toolbar>
-            </AppBar>
-            <h5>Start page.</h5>
-            <Link to="/"><Button variant="contained" color="secondary">Back to Home</Button></Link >
-        </div>);
-    }
+            </Toolbar>
+        </AppBar>
+        <h5>Start page.</h5>
+        <h5>Fixture ID: {fixtureId}</h5>
+        <Link to="/"><Button variant="contained" color="secondary">Back to Home</Button></Link >
+    </div>);
 }
-export default StartPage;
+const CountStartPage = connect(mapStateToProps)(ConnectedCountStartPage);
+export default CountStartPage;

@@ -8,8 +8,8 @@ function App() {
   return (
     <Router basename="/inventory-control">
       <div>
-        <Route exact path="/" ><HeaderPage testParam="test value"/></Route>
-        <Route path="/start"><CountStartPage /></Route>
+        <Route exact path="/" ><HeaderPage /></Route>
+        <Route exact path="/start"><CountStartPage /></Route>
       </div>
     </Router>
   );
