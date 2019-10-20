@@ -1,6 +1,7 @@
 import React from 'react';
 import HeaderPage from './HeaderPage/HeaderPage.js'
 import CountStartPage from './CountStartPage/CountStartPage.js'
+import ScanPage from './ScanPage/ScanPage.js'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 
@@ -10,6 +11,7 @@ function App() {
       <div>
         <Route exact path="/" ><HeaderPage /></Route>
         <Route exact path="/start"><CountStartPage /></Route>
+        <Route exact path="/scan"><ScanPage /></Route>
       </div>
     </Router>
   );
