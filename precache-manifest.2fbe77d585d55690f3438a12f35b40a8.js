@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6582cfb55606d6f0da0a1b84b951fc9f",
+    "revision": "805ac46c4542ffe675c656d4446c5404",
     "url": "/inventory-control/index.html"
   },
   {
-    "revision": "f78adb2358880f792aa7",
+    "revision": "2fc7f04a4351b7ef7cb0",
     "url": "/inventory-control/static/css/main.3c783e41.chunk.css"
   },
   {
-    "revision": "e59ce33456aa391b2091",
-    "url": "/inventory-control/static/js/2.cb8c5023.chunk.js"
+    "revision": "28a1158e588972393e18",
+    "url": "/inventory-control/static/js/2.6ccb988d.chunk.js"
   },
   {
-    "revision": "f78adb2358880f792aa7",
-    "url": "/inventory-control/static/js/main.faa42f26.chunk.js"
+    "revision": "2fc7f04a4351b7ef7cb0",
+    "url": "/inventory-control/static/js/main.a866f9c6.chunk.js"
   },
   {
     "revision": "ad4475bd2f81dbb2e1c2",
