@@ -22,6 +22,8 @@ export default class ScanPage extends Component {
         this.getSkuTable = this.getSkuTable.bind(this);
         this.handleSwitchToggle = this.handleSwitchToggle.bind(this);
         this.handleSkuSaveWithId = this.handleSkuSaveWithId.bind(this);
+        this.textField = React.createRef();
+        this.returnFocus = this.returnFocus.bind(this);
         this.state = {
             currentSku: '',
             scannerMode: false,
@@ -35,14 +37,9 @@ export default class ScanPage extends Component {
             skuCountList: this.state.skuCountList,
             scannerMode: this.state.scannerMode
         });
-        console.log('State before saving.' + this.state.currentSku)
-        console.log(this.state)
         if (this.state.scannerMode) {
-            console.log('Change event for scanner mode.')
             this.handleSkuSaveWithId(event.target.value);
         }
-        console.log('State after saving.' + event.target.value)
-        console.log(this.state)
     }
 
     resetState() {
@@ -51,6 +48,11 @@ export default class ScanPage extends Component {
             scannerMode: false,
             skuCountList: {}
         });
+        this.returnFocus();
+    }
+
+    returnFocus() {
+        this.textField.current.focus();
     }
 
     handleSwitchToggle() {
@@ -60,10 +62,10 @@ export default class ScanPage extends Component {
             scannerMode: !previousScannerModeState,
             skuCountList: this.state.skuCountList
         });
+        this.returnFocus();
     }
 
     handleSkuSaveWithId(skuId) {
-        console.log('Saving SKU.' + skuId)
         var skuList = this.state.skuCountList;
         if (this.state.skuCountList[skuId]) {
             skuList[skuId] = this.state.skuCountList[skuId] + 1;
@@ -71,8 +73,7 @@ export default class ScanPage extends Component {
             skuList[skuId] = 1;
         }
         this.setState({ skuCountList: skuList, currentSku: '' });
-        console.log('After saving SKU.');
-        console.log(this.state);
+        this.returnFocus();
     }
 
     handleSkuSave() {
@@ -80,7 +81,8 @@ export default class ScanPage extends Component {
     }
 
     isScanDisabled() {
-        return !this.state.currentSku && this.state.scannerMode;
+        if (this.state.scannerMode) { return true; }
+        return !this.state.currentSku;
     }
 
     getSkuTable() {
@@ -107,7 +109,7 @@ export default class ScanPage extends Component {
             <div>
                 <HeaderBar title="Inventory Control" />
                 <div className="container">
-                    <div style={{ width: '100%', display: 'flex', alignContent: 'flex-end' }}>
+                    <div style={{ display: 'flex', alignSelf: 'end' }}>
                         <FormControlLabel
                             control={
                                 <Switch onChange={this.handleSwitchToggle} checked={this.state.scannerMode} />
@@ -121,6 +123,7 @@ export default class ScanPage extends Component {
                         margin="normal"
                         variant="outlined"
                         autoFocus
+                        inputRef={this.textField}
                         value={this.state.currentSku}
                         onChange={this.handleSkuIdChange}
                     />
