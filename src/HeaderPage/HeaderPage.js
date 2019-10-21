@@ -43,6 +43,7 @@ class ConnectedHeaderPage extends Component {
                 <HeaderBar title="Inventory Control" />
                 <div className="container">
                     <TextField
+                        autoFocus
                         id="outlined-name"
                         label="Fixture ID"
                         margin="normal"

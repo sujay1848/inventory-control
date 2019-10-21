@@ -77,6 +77,7 @@ export default class ScanPage extends Component {
                         label="CSKU ID"
                         margin="normal"
                         variant="outlined"
+                        autoFocus
                         value={this.state.currentSku}
                         onChange={this.handleSkuIdChange}
                     />
