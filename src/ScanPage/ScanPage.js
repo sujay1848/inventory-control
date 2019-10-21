@@ -3,7 +3,8 @@ import HeaderBar from '../HeaderBar/HeaderBar.js';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
-import '../HeaderPage/HeaderPage.css'; import Table from '@material-ui/core/Table';
+import '../HeaderPage/HeaderPage.css';
+import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -11,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormDialog from '../CommonComponents/DialogBox.js'
 
 export default class ScanPage extends Component {
 
@@ -134,6 +136,7 @@ export default class ScanPage extends Component {
                         <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" onClick={this.resetState}>
                             Start Again
                         </Button>
+                        <FormDialog />
                         <Link to="/start" style={{ textDecoration: 'none' }}>
                             <Button style={{ width: '100%' }} variant="contained" color="secondary">
                                 Return

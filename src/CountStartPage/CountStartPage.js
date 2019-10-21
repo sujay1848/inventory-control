@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import HeaderBar from '../HeaderBar/HeaderBar.js'
+import HeaderBar from '../CommonComponents/HeaderBar.js'
 
 const useStyles = makeStyles((theme) =>
     createStyles({
