@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderBar from '../HeaderBar/HeaderBar.js';
+import HeaderBar from '../CommonComponents/HeaderBar.js';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
