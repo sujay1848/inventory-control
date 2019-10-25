@@ -3,6 +3,7 @@ import HeaderBar from '../CommonComponents/HeaderBar.js';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import '../HeaderPage/HeaderPage.css';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,8 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormDialog from '../CommonComponents/DialogBox.js'
+import { Redirect } from 'react-router';
 
-export default class ScanPage extends Component {
+const mapStateToProps = state => {
+    return { fixtureId: state.fixtureId };
+};
+
+export class ConnectedScanPage extends Component {
 
     constructor(props) {
         super(props);
@@ -107,11 +113,19 @@ export default class ScanPage extends Component {
         }
     }
     render() {
+        if (!this.props.fixtureId) {
+            return <Redirect push to="/" />;
+        }
         return (
             <div>
                 <HeaderBar title="Inventory Control" />
                 <div className="container">
-                    <div style={{ display: 'flex', alignSelf: 'end' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <div>
+                            <Typography variant="overline" style={{ fontSize: 18, margin: 10, marginBottom: 0, textTransform: 'uppercase' }} >Fixture ID:
+                                <Typography variant="overline" style={{ fontSize: 18, margin: 10, marginBottom: 0, textDecoration: 'underline' }} >{this.props.fixtureId}</Typography>
+                            </Typography>
+                        </div>
                         <FormControlLabel
                             control={
                                 <Switch onChange={this.handleSwitchToggle} checked={this.state.scannerMode} />
@@ -149,3 +163,6 @@ export default class ScanPage extends Component {
         );
     }
 }
+
+const ScanPage = connect(mapStateToProps)(ConnectedScanPage);
+export default ScanPage;
