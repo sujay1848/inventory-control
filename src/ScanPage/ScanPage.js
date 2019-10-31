@@ -13,12 +13,18 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormDialog from '../CommonComponents/DialogBox.js'
 import { Redirect } from 'react-router';
+import { scanSkus } from '../StateManagement/Actions';
 
 const mapStateToProps = state => {
-    return { fixtureId: state.fixtureId };
+    return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
 };
+
+function mapDispatchToProps(dispatch) {
+    return {
+        skuCountList: skuCountList => dispatch(scanSkus(skuCountList))
+    };
+}
 
 export class ConnectedScanPage extends Component {
 
@@ -112,6 +118,7 @@ export class ConnectedScanPage extends Component {
             </Table>);
         }
     }
+    
     render() {
         if (!this.props.fixtureId) {
             return <Redirect push to="/" />;
@@ -150,7 +157,6 @@ export class ConnectedScanPage extends Component {
                         <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" onClick={this.resetState}>
                             Start Again
                         </Button>
-                        <FormDialog />
                         <Link to="/start" style={{ textDecoration: 'none' }}>
                             <Button style={{ width: '100%' }} variant="contained" color="secondary">
                                 Return
@@ -163,6 +169,8 @@ export class ConnectedScanPage extends Component {
         );
     }
 }
-
-const ScanPage = connect(mapStateToProps)(ConnectedScanPage);
+const ScanPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ConnectedScanPage);
 export default ScanPage;
