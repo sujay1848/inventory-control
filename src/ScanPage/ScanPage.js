@@ -15,6 +15,7 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Redirect } from 'react-router';
 import { scanSkus } from '../StateManagement/Actions';
+import DialogBox from '../CommonComponents/DialogBox.js'
 
 const mapStateToProps = state => {
     return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -38,8 +39,10 @@ export class ConnectedScanPage extends Component {
         this.handleSkuSaveWithId = this.handleSkuSaveWithId.bind(this);
         this.textField = React.createRef();
         this.returnFocus = this.returnFocus.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
         this.state = {
             currentSku: '',
+            dialogOpen: false,
             scannerMode: false,
             skuCountList: {}
         }
@@ -118,6 +121,12 @@ export class ConnectedScanPage extends Component {
             </Table>);
         }
     }
+
+    handleClickOpen(){
+        this.setState({
+            dialogOpen: true
+        });
+    }
     
     render() {
         if (!this.props.fixtureId) {
@@ -151,12 +160,16 @@ export class ConnectedScanPage extends Component {
                         onChange={this.handleSkuIdChange}
                     />
                     <div style={{ display: 'flex-vertical', flexGrow: 2 }}>
-                        <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" disabled={this.isScanDisabled()} onClick={this.handleSkuSave}>
+                        <Button style={{ width: '100%', marginBottom: 20 }} variant="contained" color="secondary" disabled={this.isScanDisabled()} onClick={this.handleSkuSave}>
                             Scan
                         </Button>
                         <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" onClick={this.resetState}>
                             Start Again
                         </Button>
+                        <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" onClick={this.handleClickOpen} color="primary">
+                            Finish Scanning
+                        </Button>
+                        <DialogBox open={this.state.dialogOpen} />
                         <Link to="/start" style={{ textDecoration: 'none' }}>
                             <Button style={{ width: '100%' }} variant="contained" color="secondary">
                                 Return
