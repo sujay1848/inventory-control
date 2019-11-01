@@ -5,9 +5,8 @@ const initialState = {
 };
 function rootReducer(state = initialState, action) {
     if (action.type === ACTION_CONSTANTS.ADD_SKUS) {
-        console.log(action.state.skuList);
         return Object.assign({}, state, {
-            skuList: action.payload.skuList
+            skuCountList: action.payload.skuCountList
           });
     } else if (action.type === ACTION_CONSTANTS.SCAN_FIXTURE) {
         return Object.assign({}, state, {

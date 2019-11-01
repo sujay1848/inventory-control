@@ -15,7 +15,9 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Redirect } from 'react-router';
 import { scanSkus } from '../StateManagement/Actions';
-import DialogBox from '../CommonComponents/DialogBox.js'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const mapStateToProps = state => {
     return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -23,7 +25,7 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        skuCountList: skuCountList => dispatch(scanSkus(skuCountList))
+        sendSkuCountList: skuCountList => dispatch(scanSkus(skuCountList))
     };
 }
 
@@ -40,6 +42,7 @@ export class ConnectedScanPage extends Component {
         this.textField = React.createRef();
         this.returnFocus = this.returnFocus.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.disableButton = this.disableButton.bind(this);
         this.state = {
             currentSku: '',
             dialogOpen: false,
@@ -122,12 +125,48 @@ export class ConnectedScanPage extends Component {
         }
     }
 
-    handleClickOpen(){
+    handleClickOpen() {
         this.setState({
             dialogOpen: true
         });
     }
-    
+
+    submitCount() {
+        const { skuCountList } = this.state;
+        this.props.sendSkuCountList({ skuCountList });
+    }
+
+    handleClose() {
+        this.setState({
+            dialogOpen: false
+        });
+    }
+
+    disableButton() {
+        return !this.state.skuCountList || Object.entries(this.state.skuCountList).length === 0;
+    }
+
+    getDialogBox() {
+        return (
+            <Dialog
+                open={this.state.dialogOpen}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Finished scanning?"}</DialogTitle>
+                <DialogActions>
+                    <Link to="/summary" style={{ textDecoration: 'none' }}>
+                        <Button onClick={this.submitCount.bind(this)} color="primary">
+                            Yes
+                    </Button>
+                    </Link>
+                    <Button onClick={this.handleClose.bind(this)} color="primary" autoFocus>
+                        No
+                    </Button>
+                </DialogActions>
+            </Dialog>);
+    }
+
     render() {
         if (!this.props.fixtureId) {
             return <Redirect push to="/" />;
@@ -166,10 +205,10 @@ export class ConnectedScanPage extends Component {
                         <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" color="secondary" onClick={this.resetState}>
                             Start Again
                         </Button>
-                        <Button style={{ width: '100%', marginBottom: 10 }} variant="contained" onClick={this.handleClickOpen} color="primary">
+                        <Button style={{ width: '100%', marginBottom: 10 }} disabled={this.disableButton()} variant="contained" onClick={this.handleClickOpen} color="primary">
                             Finish Scanning
                         </Button>
-                        <DialogBox open={this.state.dialogOpen} />
+                        <div>{this.getDialogBox()}</div>
                         <Link to="/start" style={{ textDecoration: 'none' }}>
                             <Button style={{ width: '100%' }} variant="contained" color="secondary">
                                 Return
