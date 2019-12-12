@@ -14,9 +14,9 @@ jobs:
     steps:
       - checkout
 
-#      - add_ssh_keys:
-#          fingerprints:
-#            - "27:d6:0b:7a:7c:4e:77:c8:76:4a:9a:c4:db:1b:c3:e7"
+      - add_ssh_keys:
+          fingerprints:
+            - "53:de:70:e7:e2:d4:bc:b6:81:15:e6:97:63:71:2a:92"
 
       # Download and cache dependencies
       - restore_cache:
@@ -25,16 +25,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-#      - run: npm install
-#      - run: npm run deploy
-      - run:
-          name: Deploying to GitHub Pages
-          command: |
-            git config --global user.email "junrong09@users.noreply.github.com"
-            git config --global user.name "junrong09"
-            echo "machine github.com login junrong09 password $GITHUB_TOKEN" > ~/.netrc
-            npm install
-            npm run deploy
+      - run: npm install
+      - run: git config user.email "junrongy09@gmail.com"
+      - run: git config user.name "junrong09"
+      - run: npm run deploy
 
       - save_cache:
           paths:
