@@ -3,9 +3,6 @@ jobs:
   build:
     branches:
       only:
-        - development
-      ignore:
-        - gh-pages
         - master
     docker:
       - image: circleci/node:9.9.0
