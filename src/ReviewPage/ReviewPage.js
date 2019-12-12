@@ -15,7 +15,7 @@ const mapStateToProps = state => {
   return { skuCountList: state.skuCountList };
 };
 
-class ConnectedSummaryPage extends Component {
+class ConnectedReviewPage extends Component {
   constructor(props) {
     super(props);
     this.getSkuTable.bind(this);
@@ -75,7 +75,7 @@ class ConnectedSummaryPage extends Component {
               variant="contained"
               color="secondary"
             >
-              Back
+              Submit
             </Button>
           </Link>
         </div>
@@ -84,5 +84,5 @@ class ConnectedSummaryPage extends Component {
   }
 }
 
-const SummaryPage = connect(mapStateToProps)(ConnectedSummaryPage);
-export default SummaryPage;
+const ReviewPage = connect(mapStateToProps)(ConnectedReviewPage);
+export default ReviewPage;
