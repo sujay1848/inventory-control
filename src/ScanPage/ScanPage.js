@@ -190,14 +190,16 @@ export class ConnectedScanPage extends Component {
                     </div>
                     <TextField
                         id="outlined-name"
-                        label="CSKU ID"
+                        label="CSKU IDD"
                         margin="normal"
                         variant="outlined"
                         autoFocus
                         inputRef={this.textField}
                         value={this.state.currentSku}
                         onChange={this.handleSkuIdChange}
+                        inputProps={{inputmode: "none"}}
                     />
+                    <input type="text" inputMode="none"/>
                     <div style={{ display: 'flex-vertical', flexGrow: 2 }}>
                         <Button style={{ width: '100%', marginBottom: 20 }} variant="contained" color="secondary" disabled={this.isScanDisabled()} onClick={this.handleSkuSave}>
                             Scan
