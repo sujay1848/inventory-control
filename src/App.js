@@ -1,27 +1,21 @@
 import React from 'react';
-import HeaderComponent from './HeaderComponent/HeaderComponent.js'
+import HeaderPage from './HeaderPage/HeaderPage.js'
+import CountStartPage from './CountStartPage/CountStartPage.js'
+import ScanPage from './ScanPage/ScanPage.js'
+import SummaryPage from './SummaryPage/SummaryPage.js'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
-import logo from './logo.svg'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-        <HeaderComponent />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename="/inventory-control">
+      <div>
+        <Route exact path="/" ><HeaderPage /></Route>
+        <Route exact path="/start"><CountStartPage /></Route>
+        <Route exact path="/scan"><ScanPage /></Route>
+        <Route exact path="/summary"><SummaryPage /></Route>
+      </div>
+    </Router>
   );
 }
 
