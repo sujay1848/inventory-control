@@ -7,7 +7,6 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 
@@ -18,6 +17,7 @@ const mapStateToProps = state => {
 class ConnectedSummaryPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   hasSkuCount = () => {
@@ -35,10 +35,10 @@ class ConnectedSummaryPage extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Typography variant="h6">SKU ID</Typography>
+                  <span className="f5">SKU ID</span>
                 </TableCell>
                 <TableCell>
-                  <Typography variant="h6">Count</Typography>
+                  <span className="f5">Count</span>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -63,8 +63,8 @@ class ConnectedSummaryPage extends Component {
     return (
       <div>
         <HeaderBar title="Summary" />
-        <div style={{ display: "flex-vertical", flexGrow: 2, margin: 10 }}>
-          <Typography variant="h6">Final Counts</Typography>
+        <div className="flex flex-column ma3">
+          <span className="f4">Final Counts</span>
           <div>{this.getSkuTable()}</div>
           <Link to="/scan" className="noLink">
             <Button

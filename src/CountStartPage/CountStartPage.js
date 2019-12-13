@@ -1,20 +1,9 @@
 import React, { Component } from "react";
-import Typography from "@material-ui/core/Typography";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import "./CountStartPage.css";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import HeaderBar from "../CommonComponents/HeaderBar.js";
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: {
-      flexGrow: 1
-    }
-  })
-);
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId };
@@ -27,31 +16,13 @@ class ConnectedCountStartPage extends Component {
     }
 
     return (
-      <div className={useStyles.root}>
+      <div>
         <HeaderBar title="Inventory Control" />
-        <Typography
-          variant="overline"
-          style={{
-            fontSize: 18,
-            margin: 10,
-            marginBottom: 0,
-            textTransform: "uppercase"
-          }}
-        >
-          Fixture ID:
-          <Typography
-            variant="overline"
-            style={{
-              fontSize: 18,
-              margin: 10,
-              marginBottom: 0,
-              textDecoration: "underline"
-            }}
-          >
-            {this.props.fixtureId}
-          </Typography>
-        </Typography>
-        <div style={{ display: "flex-vertical", flexGrow: 2, margin: 10 }}>
+        <div className="ma2">
+          <span className="f4 mr2">FIXTURE ID:</span>
+          <span className="underline f4">{this.props.fixtureId}</span>
+        </div>
+        <div className="flex flex-column ma3">
           <Link to="/scan" className="noLink">
             <Button
               style={{ width: "100%", marginBottom: 10 }}
@@ -62,11 +33,7 @@ class ConnectedCountStartPage extends Component {
             </Button>
           </Link>
           <Link to="/" className="noLink">
-            <Button
-              style={{ width: "100%" }}
-              variant="contained"
-              color="secondary"
-            >
+            <Button className="w-100" variant="contained" color="secondary">
               Back to Home
             </Button>
           </Link>

@@ -3,7 +3,6 @@ import HeaderBar from "../CommonComponents/HeaderBar.js";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import "./HeaderPage.css";
 import { connect } from "react-redux";
 import { scanFixture } from "../StateManagement/Actions";
 
@@ -33,7 +32,7 @@ class ConnectedHeaderPage extends Component {
     return (
       <div>
         <HeaderBar title="Inventory Control" />
-        <div className="container">
+        <div className="flex flex-column ma3">
           <TextField
             id="outlined-name"
             label="User ID"
@@ -52,7 +51,7 @@ class ConnectedHeaderPage extends Component {
           <Link to="/start" className="noLink">
             <Button
               disabled={this.isButtonDisabled()}
-              style={{ width: "100%" }}
+              className="w-100"
               fullWidth={true}
               variant="contained"
               color="secondary"

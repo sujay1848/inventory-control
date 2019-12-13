@@ -4,13 +4,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import "../HeaderPage/HeaderPage.css";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Redirect } from "react-router";
@@ -107,10 +105,10 @@ export class ConnectedScanPage extends Component {
           <TableHead>
             <TableRow>
               <TableCell>
-                <Typography variant="h6">SKU ID</Typography>
+                <span className="f5">SKU ID</span>
               </TableCell>
               <TableCell>
-                <Typography variant="h6">Count</Typography>
+                <span className="f5">Count</span>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -179,31 +177,11 @@ export class ConnectedScanPage extends Component {
     return (
       <div>
         <HeaderBar title="Inventory Control" />
-        <div className="container">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
-              <Typography
-                variant="overline"
-                style={{
-                  fontSize: 18,
-                  margin: 10,
-                  marginBottom: 0,
-                  textTransform: "uppercase"
-                }}
-              >
-                Fixture ID:
-                <Typography
-                  variant="overline"
-                  style={{
-                    fontSize: 18,
-                    margin: 10,
-                    marginBottom: 0,
-                    textDecoration: "underline"
-                  }}
-                >
-                  {this.props.fixtureId}
-                </Typography>
-              </Typography>
+        <div className="flex flex-column ma3">
+          <div className="flex justify-between">
+            <div className="ma2">
+              <span className="f4 mr2">FIXTURE ID:</span>
+              <span className="underline f4">{this.props.fixtureId}</span>
             </div>
             <FormControlLabel
               control={
@@ -226,7 +204,7 @@ export class ConnectedScanPage extends Component {
             onChange={this.handleSkuIdChange}
             inputProps={{ inputmode: "none" }}
           />
-          <div style={{ display: "flex-vertical", flexGrow: 2 }}>
+          <div className="flex flex-column">
             <Button
               style={{ width: "100%", marginBottom: 20 }}
               variant="contained"
@@ -254,7 +232,7 @@ export class ConnectedScanPage extends Component {
               Review
             </Button>
             <div>{this.getDialogBox()}</div>
-            <Link to="/start" style={{ textDecoration: "none" }}>
+            <Link to="/start" className="noLink">
               <Button
                 style={{ width: "100%" }}
                 variant="contained"

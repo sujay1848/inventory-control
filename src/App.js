@@ -2,7 +2,6 @@ import React from "react";
 import HeaderPage from "./HeaderPage/HeaderPage.js";
 import CountStartPage from "./CountStartPage/CountStartPage.js";
 import ScanPage from "./ScanPage/ScanPage.js";
-import ReviewPage from "./ReviewPage/ReviewPage";
 import SummaryPage from "./SummaryPage/SummaryPage.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
