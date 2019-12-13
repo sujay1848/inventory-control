@@ -9,7 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Redirect } from "react-router";
-import { scanSkus } from "../StateManagement/Actions";
+import { scanFixture, scanSkus } from "../StateManagement/Actions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -18,11 +18,12 @@ const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
-    sendSkuCountList: skuCountList => dispatch(scanSkus(skuCountList))
+    setSkuCountList: skuCountList => dispatch(scanSkus(skuCountList)),
+    setFixtureId: fixtureId => dispatch(scanFixture(fixtureId))
   };
-}
+};
 
 export class ConnectedReviewPage extends Component {
   constructor(props) {
@@ -71,7 +72,8 @@ export class ConnectedReviewPage extends Component {
 
   submitCount = () => {
     const { skuCountList } = this.state;
-    this.props.sendSkuCountList({ skuCountList });
+    this.props.setSkuCountList({ skuCountList });
+    this.props.setFixtureId({});
   };
 
   handleClose = () => {

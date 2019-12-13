@@ -180,7 +180,7 @@ export class ConnectedScanPage extends Component {
               color="secondary"
               onClick={this.resetState}
             >
-              Start Again
+              Clear
             </Button>
             <Link to="/review" className="noLink">
               <Button
