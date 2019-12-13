@@ -18,18 +18,16 @@ const mapStateToProps = state => {
 class ConnectedReviewPage extends Component {
   constructor(props) {
     super(props);
-    this.getSkuTable.bind(this);
-    this.hasSkuCount.bind(this);
   }
 
-  hasSkuCount() {
+  hasSkuCount = () => {
     return (
       this.props.skuCountList &&
       Object.entries(this.props.skuCountList).length > 0
     );
-  }
+  };
 
-  getSkuTable() {
+  getSkuTable = () => {
     if (this.hasSkuCount()) {
       return (
         <div>
@@ -56,7 +54,7 @@ class ConnectedReviewPage extends Component {
         </div>
       );
     }
-  }
+  };
 
   render() {
     if (!this.hasSkuCount()) {

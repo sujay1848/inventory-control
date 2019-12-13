@@ -20,9 +20,9 @@ function App() {
         <Route exact path="/scan">
           <ScanPage />
         </Route>
-        <Route exact path="/review">
-          <ReviewPage />
-        </Route>
+        {/*<Route exact path="/review">*/}
+        {/*  <ReviewPage />*/}
+        {/*</Route>*/}
         <Route exact path="/summary">
           <SummaryPage />
         </Route>

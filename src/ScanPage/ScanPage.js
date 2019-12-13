@@ -32,16 +32,7 @@ function mapDispatchToProps(dispatch) {
 export class ConnectedScanPage extends Component {
   constructor(props) {
     super(props);
-    this.handleSkuIdChange = this.handleSkuIdChange.bind(this);
-    this.handleSkuSave = this.handleSkuSave.bind(this);
-    this.resetState = this.resetState.bind(this);
-    this.getSkuTable = this.getSkuTable.bind(this);
-    this.handleSwitchToggle = this.handleSwitchToggle.bind(this);
-    this.handleSkuSaveWithId = this.handleSkuSaveWithId.bind(this);
     this.textField = React.createRef();
-    this.returnFocus = this.returnFocus.bind(this);
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.disableButton = this.disableButton.bind(this);
     this.state = {
       currentSku: "",
       dialogOpen: false,
@@ -50,7 +41,7 @@ export class ConnectedScanPage extends Component {
     };
   }
 
-  handleSkuIdChange(event) {
+  handleSkuIdChange = event => {
     this.setState({
       currentSku: event.target.value,
       skuCountList: this.state.skuCountList,
@@ -59,22 +50,22 @@ export class ConnectedScanPage extends Component {
     if (this.state.scannerMode) {
       this.handleSkuSaveWithId(event.target.value);
     }
-  }
+  };
 
-  resetState() {
+  resetState = () => {
     this.setState({
       currentSku: "",
       scannerMode: false,
       skuCountList: {}
     });
     this.returnFocus();
-  }
+  };
 
-  returnFocus() {
+  returnFocus = () => {
     this.textField.current.focus();
-  }
+  };
 
-  handleSwitchToggle() {
+  handleSwitchToggle = () => {
     var previousScannerModeState = this.state.scannerMode;
     this.setState({
       currentSku: this.state.currentSku,
@@ -82,9 +73,9 @@ export class ConnectedScanPage extends Component {
       skuCountList: this.state.skuCountList
     });
     this.returnFocus();
-  }
+  };
 
-  handleSkuSaveWithId(skuId) {
+  handleSkuSaveWithId = skuId => {
     var skuList = this.state.skuCountList;
     if (this.state.skuCountList[skuId]) {
       skuList[skuId] = this.state.skuCountList[skuId] + 1;
@@ -93,20 +84,20 @@ export class ConnectedScanPage extends Component {
     }
     this.setState({ skuCountList: skuList, currentSku: "" });
     this.returnFocus();
-  }
+  };
 
-  handleSkuSave() {
+  handleSkuSave = () => {
     this.handleSkuSaveWithId(this.state.currentSku);
-  }
+  };
 
-  isScanDisabled() {
+  isScanDisabled = () => {
     if (this.state.scannerMode) {
       return true;
     }
     return !this.state.currentSku;
-  }
+  };
 
-  getSkuTable() {
+  getSkuTable = () => {
     if (
       this.state.skuCountList &&
       Object.entries(this.state.skuCountList).length > 0
@@ -134,31 +125,28 @@ export class ConnectedScanPage extends Component {
         </Table>
       );
     }
-  }
+  };
 
-  handleClickOpen() {
+  handleClickOpen = () => {
     this.setState({
       dialogOpen: true
     });
-  }
+  };
 
-  submitCount() {
+  submitCount = () => {
     const { skuCountList } = this.state;
     this.props.sendSkuCountList({ skuCountList });
-  }
+  };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({
       dialogOpen: false
     });
-  }
+  };
 
-  disableButton() {
-    return (
-      !this.state.skuCountList ||
-      Object.entries(this.state.skuCountList).length === 0
-    );
-  }
+  disableButton = () =>
+    !this.state.skuCountList ||
+    Object.entries(this.state.skuCountList).length === 0;
 
   getDialogBox() {
     return (
@@ -172,15 +160,11 @@ export class ConnectedScanPage extends Component {
         </DialogTitle>
         <DialogActions>
           <Link to="/summary" className="noLink">
-            <Button onClick={this.submitCount.bind(this)} color="primary">
+            <Button onClick={this.submitCount} color="primary">
               Yes
             </Button>
           </Link>
-          <Button
-            onClick={this.handleClose.bind(this)}
-            color="primary"
-            autoFocus
-          >
+          <Button onClick={this.handleClose} color="primary" autoFocus>
             No
           </Button>
         </DialogActions>
