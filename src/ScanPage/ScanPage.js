@@ -13,9 +13,6 @@ import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Redirect } from "react-router";
 import { scanSkus } from "../StateManagement/Actions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -33,7 +30,6 @@ export class ConnectedScanPage extends Component {
     this.textField = React.createRef();
     this.state = {
       currentSku: "",
-      dialogOpen: false,
       scannerMode: false,
       skuCountList: {}
     };
@@ -125,50 +121,14 @@ export class ConnectedScanPage extends Component {
     }
   };
 
-  handleClickOpen = () => {
-    this.setState({
-      dialogOpen: true
-    });
-  };
-
-  submitCount = () => {
+  submitCount = event => {
     const { skuCountList } = this.state;
     this.props.sendSkuCountList({ skuCountList });
-  };
-
-  handleClose = () => {
-    this.setState({
-      dialogOpen: false
-    });
   };
 
   disableButton = () =>
     !this.state.skuCountList ||
     Object.entries(this.state.skuCountList).length === 0;
-
-  getDialogBox() {
-    return (
-      <Dialog
-        open={this.state.dialogOpen}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Finished scanning?"}
-        </DialogTitle>
-        <DialogActions>
-          <Link to="/summary" className="noLink">
-            <Button onClick={this.submitCount} color="primary">
-              Yes
-            </Button>
-          </Link>
-          <Button onClick={this.handleClose} color="primary" autoFocus>
-            No
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
 
   render() {
     if (!this.props.fixtureId) {
@@ -202,7 +162,7 @@ export class ConnectedScanPage extends Component {
             inputRef={this.textField}
             value={this.state.currentSku}
             onChange={this.handleSkuIdChange}
-            inputProps={{ inputmode: "none" }}
+            inputProps={{ inputMode: "none" }}
           />
           <div className="flex flex-column">
             <Button
@@ -222,16 +182,17 @@ export class ConnectedScanPage extends Component {
             >
               Start Again
             </Button>
-            <Button
-              style={{ width: "100%", marginBottom: 10 }}
-              disabled={this.disableButton()}
-              variant="contained"
-              onClick={this.handleClickOpen}
-              color="primary"
-            >
-              Review
-            </Button>
-            <div>{this.getDialogBox()}</div>
+            <Link to="/review" className="noLink">
+              <Button
+                style={{ width: "100%", marginBottom: 10 }}
+                disabled={this.disableButton()}
+                variant="contained"
+                onClick={this.submitCount}
+                color="primary"
+              >
+                Review
+              </Button>
+            </Link>
             <Link to="/start" className="noLink">
               <Button
                 style={{ width: "100%" }}
