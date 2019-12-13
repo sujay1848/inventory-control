@@ -171,7 +171,7 @@ export class ConnectedScanPage extends Component {
           {"Finished scanning?"}
         </DialogTitle>
         <DialogActions>
-          <Link to="/summary" style={{ textDecoration: "none" }}>
+          <Link to="/summary" className="noLink">
             <Button onClick={this.submitCount.bind(this)} color="primary">
               Yes
             </Button>

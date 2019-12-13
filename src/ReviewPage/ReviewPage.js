@@ -68,7 +68,7 @@ class ConnectedReviewPage extends Component {
         <div style={{ display: "flex-vertical", flexGrow: 2, margin: 10 }}>
           <Typography variant="h6">Final Counts</Typography>
           <div>{this.getSkuTable()}</div>
-          <Link to="/scan" style={{ textDecoration: "none" }}>
+          <Link to="/scan" className="noLink">
             <Button
               style={{ width: "100%" }}
               fullWidth={true}

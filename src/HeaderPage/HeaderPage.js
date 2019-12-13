@@ -21,8 +21,7 @@ class ConnectedHeaderPage extends Component {
 
   handleFixtureIdChange = event =>
     this.setState({ fixtureId: event.target.value });
-  handleUserIdChange = event =>
-      this.setState({userId: event.target.value});
+  handleUserIdChange = event => this.setState({ userId: event.target.value });
   handleSubmit = event => {
     const { fixtureId } = this.state;
     this.props.scanFixture({ fixtureId });
@@ -36,12 +35,11 @@ class ConnectedHeaderPage extends Component {
         <HeaderBar title="Inventory Control" />
         <div className="container">
           <TextField
-              autoFocus
-              id="outlined-name"
-              label="User ID"
-              margin="normal"
-              variant="outlined"
-              onChange={this.handleUserIdChange}
+            id="outlined-name"
+            label="User ID"
+            margin="normal"
+            variant="outlined"
+            onChange={this.handleUserIdChange}
           />
           <TextField
             autoFocus
@@ -51,7 +49,7 @@ class ConnectedHeaderPage extends Component {
             variant="outlined"
             onChange={this.handleFixtureIdChange}
           />
-          <Link to="/start" style={{ textDecoration: "none" }}>
+          <Link to="/start" className="noLink">
             <Button
               disabled={this.isButtonDisabled()}
               style={{ width: "100%" }}

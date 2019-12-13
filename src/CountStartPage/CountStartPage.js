@@ -52,7 +52,7 @@ class ConnectedCountStartPage extends Component {
           </Typography>
         </Typography>
         <div style={{ display: "flex-vertical", flexGrow: 2, margin: 10 }}>
-          <Link to="/scan" style={{ textDecoration: "none" }}>
+          <Link to="/scan" className="noLink">
             <Button
               style={{ width: "100%", marginBottom: 10 }}
               variant="contained"
@@ -61,7 +61,7 @@ class ConnectedCountStartPage extends Component {
               Start Scanning
             </Button>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/" className="noLink">
             <Button
               style={{ width: "100%" }}
               variant="contained"
