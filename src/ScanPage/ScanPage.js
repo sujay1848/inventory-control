@@ -65,9 +65,12 @@ export class ConnectedScanPage extends Component {
 
   handleSwitchToggle = () => {
     var previousScannerModeState = this.state.scannerMode;
-    this.setState({
-      scannerMode: !previousScannerModeState,
-    }, this.returnFocus);
+    this.setState(
+      {
+        scannerMode: !previousScannerModeState
+      },
+      this.returnFocus
+    );
   };
 
   handleSkuSaveWithId = skuId => {

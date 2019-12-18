@@ -13,6 +13,7 @@ import { scanFixture, scanSkus } from "../StateManagement/Actions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { EditableTable } from "./EditableTable";
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -29,7 +30,6 @@ export class ConnectedReviewPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSku: "",
       dialogOpen: false
     };
   }
@@ -71,8 +71,7 @@ export class ConnectedReviewPage extends Component {
   };
 
   submitCount = () => {
-    const { skuCountList } = this.state;
-    this.props.setSkuCountList({ skuCountList });
+    this.props.setSkuCountList({});
     this.props.setFixtureId({});
   };
 
@@ -121,7 +120,12 @@ export class ConnectedReviewPage extends Component {
             <span className="f4 mr2">FIXTURE ID:</span>
             <span className="underline f4">{this.props.fixtureId}</span>
           </div>
-          <div>{this.getSkuTable()}</div>
+          <div>
+            <EditableTable
+              skuCountList={this.props.skuCountList}
+              setSkuCountList={this.props.setSkuCountList}
+            />
+          </div>
           <div className="flex flex-column">
             <Button
               style={{ width: "100%", marginBottom: 10 }}
