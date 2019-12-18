@@ -37,9 +37,7 @@ export class ConnectedScanPage extends Component {
 
   handleSkuIdChange = event => {
     this.setState({
-      currentSku: event.target.value,
-      skuCountList: this.state.skuCountList,
-      scannerMode: this.state.scannerMode
+      currentSku: event.target.value
     });
     if (this.state.scannerMode) {
       this.handleSkuSaveWithId(event.target.value);
@@ -57,10 +55,10 @@ export class ConnectedScanPage extends Component {
   returnFocus = () => {
     this.textField.current.focus();
     if (this.state.scannerMode) {
+      // Hide virtual keyboard
       this.textField.current.setAttribute("readonly", true);
       setTimeout(() => {
         this.textField.current.removeAttribute("readonly");
-        // this.textField.current.focus();
       }, 100);
     }
   };
@@ -165,6 +163,7 @@ export class ConnectedScanPage extends Component {
             inputRef={this.textField}
             value={this.state.currentSku}
             onChange={this.handleSkuIdChange}
+            onClick={this.returnFocus}
           />
           <div className="flex flex-column">
             <Button
