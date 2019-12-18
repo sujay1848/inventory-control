@@ -30,7 +30,7 @@ export class ConnectedScanPage extends Component {
     this.textField = React.createRef();
     this.state = {
       currentSku: "",
-      scannerMode: false,
+      scannerMode: true,
       skuCountList: {}
     };
   }
@@ -53,6 +53,7 @@ export class ConnectedScanPage extends Component {
   };
 
   returnFocus = () => {
+    if (this.textField.current == null) return;
     this.textField.current.focus();
     if (this.state.scannerMode) {
       // Hide virtual keyboard
@@ -64,10 +65,9 @@ export class ConnectedScanPage extends Component {
   };
 
   handleSwitchToggle = () => {
-    var previousScannerModeState = this.state.scannerMode;
     this.setState(
       {
-        scannerMode: !previousScannerModeState
+        scannerMode: !this.state.scannerMode
       },
       this.returnFocus
     );
@@ -133,6 +133,10 @@ export class ConnectedScanPage extends Component {
   disableButton = () =>
     !this.state.skuCountList ||
     Object.entries(this.state.skuCountList).length === 0;
+
+  componentDidMount() {
+    this.returnFocus();
+  }
 
   render() {
     if (!this.props.fixtureId) {
