@@ -3,20 +3,20 @@ import HeaderBar from "../CommonComponents/HeaderBar.js";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import { Redirect } from "react-router";
 import { scanFixture, scanSkus } from "../StateManagement/Actions";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { EditableTable } from "./EditableTable";
+import { saveStocktake } from "../ControllerInteface/ApiCaller";
 
 const mapStateToProps = state => {
-  return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
+  return {
+    fixtureId: state.fixtureId,
+    skuCountList: state.skuCountList,
+    userId: state.userId
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -34,51 +34,12 @@ export class ConnectedReviewPage extends Component {
     };
   }
 
-  getSkuTable = () => {
-    if (
-      this.props.skuCountList &&
-      Object.entries(this.props.skuCountList).length > 0
-    ) {
-      return (
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <span className="f5">SKU ID</span>
-              </TableCell>
-              <TableCell>
-                <span className="f5">Count</span>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Object.entries(this.props.skuCountList).map(keys => (
-              <TableRow key={keys[0]}>
-                <TableCell>{keys[0]}</TableCell>
-                <TableCell>{keys[1]}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      );
-    }
-  };
-
-  handleClickOpen = () => {
-    this.setState({
-      dialogOpen: true
-    });
-  };
-
   submitCount = () => {
+    console.log(this.props.skuCountList);
+    let { userId, fixtureId, skuCountList } = this.props;
+    saveStocktake(userId, fixtureId, skuCountList);
     this.props.setSkuCountList({});
     this.props.setFixtureId({});
-  };
-
-  handleClose = () => {
-    this.setState({
-      dialogOpen: false
-    });
   };
 
   disableButton = () =>
@@ -99,7 +60,15 @@ export class ConnectedReviewPage extends Component {
           <Button onClick={this.submitCount} color="primary">
             Yes
           </Button>
-          <Button onClick={this.handleClose} color="primary" autoFocus>
+          <Button
+            onClick={() => {
+              this.setState({
+                dialogOpen: false
+              });
+            }}
+            color="primary"
+            autoFocus
+          >
             No
           </Button>
         </DialogActions>
@@ -108,7 +77,6 @@ export class ConnectedReviewPage extends Component {
   }
 
   render() {
-    console.log(this.props.skuCountList);
     if (!this.props.fixtureId) {
       return <Redirect push to="/" />;
     }
@@ -131,7 +99,11 @@ export class ConnectedReviewPage extends Component {
               style={{ width: "100%", marginBottom: 10 }}
               disabled={this.disableButton()}
               variant="contained"
-              onClick={this.handleClickOpen}
+              onClick={() => {
+                this.setState({
+                  dialogOpen: true
+                });
+              }}
               color="primary"
             >
               Submit
