@@ -49,7 +49,6 @@ export class ConnectedScanPage extends Component {
   resetState = () => {
     this.setState({
       currentSku: "",
-      scannerMode: false,
       skuCountList: {}
     });
     this.returnFocus();
@@ -57,16 +56,20 @@ export class ConnectedScanPage extends Component {
 
   returnFocus = () => {
     this.textField.current.focus();
+    if (this.state.scannerMode) {
+      this.textField.current.setAttribute("readonly", true);
+      setTimeout(() => {
+        this.textField.current.removeAttribute("readonly");
+        // this.textField.current.focus();
+      }, 100);
+    }
   };
 
   handleSwitchToggle = () => {
     var previousScannerModeState = this.state.scannerMode;
     this.setState({
-      currentSku: this.state.currentSku,
       scannerMode: !previousScannerModeState,
-      skuCountList: this.state.skuCountList
-    });
-    this.returnFocus();
+    }, this.returnFocus);
   };
 
   handleSkuSaveWithId = skuId => {
@@ -162,7 +165,6 @@ export class ConnectedScanPage extends Component {
             inputRef={this.textField}
             value={this.state.currentSku}
             onChange={this.handleSkuIdChange}
-            inputProps={{ inputMode: "none" }}
           />
           <div className="flex flex-column">
             <Button
