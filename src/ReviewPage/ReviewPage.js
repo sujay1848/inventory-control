@@ -10,6 +10,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { EditableTable } from "./EditableTable";
 import { saveStocktake } from "../ControllerInteface/ApiCaller";
+import {toast} from "react-toastify";
 
 const mapStateToProps = state => {
   return {
@@ -26,6 +27,24 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const toastSuccess = () => toast.success("💾  Successfully Saved", {
+  position: "bottom-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true
+});
+
+const toastFailure = () => toast.error("🚫  Failed to connect", {
+  position: "bottom-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: false,
+  draggable: true
+});
+
 export class ConnectedReviewPage extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +56,7 @@ export class ConnectedReviewPage extends Component {
   submitCount = () => {
     console.log(this.props.skuCountList);
     let { userId, fixtureId, skuCountList } = this.props;
-    saveStocktake(userId, fixtureId, skuCountList);
+    saveStocktake(userId, fixtureId, skuCountList, toastSuccess, toastFailure);
     this.props.setSkuCountList({});
     this.props.setFixtureId({});
   };

@@ -5,8 +5,11 @@ import ScanPage from "./ScanPage/ScanPage.js";
 import ReviewPage from "./ReviewPage/ReviewPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  toast.configure();
   return (
     <Router basename="/inventory-control">
       <div>
