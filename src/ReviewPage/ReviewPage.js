@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import HeaderBar from "../CommonComponents/HeaderBar.js";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { scanFixture, scanSkus } from "../StateManagement/Actions";
@@ -128,15 +127,6 @@ export class ConnectedReviewPage extends Component {
               Submit
             </Button>
             <div>{this.getDialogBox()}</div>
-            <Link to="/start" className="noLink">
-              <Button
-                style={{ width: "100%" }}
-                variant="contained"
-                color="secondary"
-              >
-                Return
-              </Button>
-            </Link>
           </div>
         </div>
       </div>

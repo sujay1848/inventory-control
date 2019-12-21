@@ -13,6 +13,7 @@ import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Redirect } from "react-router";
 import { scanSkus } from "../StateManagement/Actions";
+import Swal from 'sweetalert2';
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -138,6 +139,21 @@ export class ConnectedScanPage extends Component {
     this.returnFocus();
   }
 
+  onClickClear = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCloseButton: true,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, clear it!'
+    }).then((result) => {
+      if (result.value) {
+        this.resetState();
+      }
+    });
+  };
+
   render() {
     if (!this.props.fixtureId) {
       return <Redirect push to="/" />;
@@ -180,13 +196,13 @@ export class ConnectedScanPage extends Component {
               disabled={this.isScanDisabled()}
               onClick={this.handleSkuSave}
             >
-              Scan
+              Enter
             </Button>
             <Button
               style={{ width: "100%", marginBottom: 10 }}
               variant="contained"
               color="secondary"
-              onClick={this.resetState}
+              onClick={this.onClickClear}
             >
               Clear
             </Button>
@@ -199,15 +215,6 @@ export class ConnectedScanPage extends Component {
                 color="primary"
               >
                 Review
-              </Button>
-            </Link>
-            <Link to="/start" className="noLink">
-              <Button
-                style={{ width: "100%" }}
-                variant="contained"
-                color="secondary"
-              >
-                Return
               </Button>
             </Link>
           </div>
