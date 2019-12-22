@@ -7,7 +7,3 @@ export function scanSkus(payload) {
 export function scanFixture(payload) {
   return { type: ACTION_CONSTANTS.SCAN_FIXTURE, payload };
 }
-
-export function setUserId(payload) {
-  return { type: ACTION_CONSTANTS.SET_USER_ID, payload };
-}

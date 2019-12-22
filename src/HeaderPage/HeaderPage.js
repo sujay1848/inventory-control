@@ -4,44 +4,34 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { scanFixture, setUserId } from "../StateManagement/Actions";
+import { scanFixture } from "../StateManagement/Actions";
 
 function mapDispatchToProps(dispatch) {
   return {
     scanFixture: fixtureId => dispatch(scanFixture(fixtureId)),
-    setUserId: userId => dispatch(setUserId(userId))
   };
 }
 
 class ConnectedHeaderPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { fixtureId: null, userId: null };
+    this.state = { fixtureId: null };
   }
 
   handleFixtureIdChange = event =>
     this.setState({ fixtureId: event.target.value });
-  handleUserIdChange = event => this.setState({ userId: event.target.value });
   handleSubmit = event => {
-    const { fixtureId, userId } = this.state;
+    const { fixtureId } = this.state;
     this.props.scanFixture({ fixtureId });
-    this.props.setUserId({ userId });
-    this.setState({ fixtureId: "" });
+    // this.setState({ fixtureId: "" });
   };
-  isButtonDisabled = () => !this.state.fixtureId || !this.state.userId;
+  isButtonDisabled = () => !this.state.fixtureId;
 
   render() {
     return (
       <div>
         <HeaderBar title="Inventory Control" />
         <div className="flex flex-column ma3">
-          <TextField
-            id="outlined-name"
-            label="User ID"
-            margin="normal"
-            variant="outlined"
-            onChange={this.handleUserIdChange}
-          />
           <TextField
             autoFocus
             id="outlined-name"
