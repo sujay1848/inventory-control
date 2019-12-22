@@ -4,11 +4,11 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { scanFixture } from "../StateManagement/Actions";
+import { setFixture } from "../StateManagement/Actions";
 
 function mapDispatchToProps(dispatch) {
   return {
-    scanFixture: fixtureId => dispatch(scanFixture(fixtureId)),
+    setFixture: fixtureId => dispatch(setFixture(fixtureId))
   };
 }
 
@@ -22,8 +22,7 @@ class ConnectedHeaderPage extends Component {
     this.setState({ fixtureId: event.target.value });
   handleSubmit = event => {
     const { fixtureId } = this.state;
-    this.props.scanFixture({ fixtureId });
-    // this.setState({ fixtureId: "" });
+    this.props.setFixture({ fixtureId });
   };
   isButtonDisabled = () => !this.state.fixtureId;
 

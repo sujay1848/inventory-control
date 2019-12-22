@@ -65,7 +65,6 @@ export class EditableTable extends Component {
   };
 
   render() {
-    console.log(this.props.skuCountList);
     return (
       <Table stickyHeader>
         <TableHead>

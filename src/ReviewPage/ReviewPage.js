@@ -3,7 +3,7 @@ import HeaderBar from "../CommonComponents/HeaderBar.js";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import { scanFixture, scanSkus } from "../StateManagement/Actions";
+import { setFixture, scanSkus } from "../StateManagement/Actions";
 import { EditableTable } from "./EditableTable";
 import { saveStocktake } from "../ControllerInteface/ApiCaller";
 import Swal from "sweetalert2";
@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setSkuCountList: skuCountList => dispatch(scanSkus(skuCountList)),
-    setFixtureId: fixtureId => dispatch(scanFixture(fixtureId))
+    setFixtureId: fixtureId => dispatch(setFixture(fixtureId))
   };
 };
 
