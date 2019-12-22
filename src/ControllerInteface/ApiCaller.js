@@ -1,5 +1,3 @@
-
-
 const URL = "http://3.134.88.218:3001/";
 const POST_SUBMISSION = URL + "submission";
 
@@ -9,7 +7,7 @@ export const saveStocktake = (userId, fixtureId, stocks, success, fail) => {
     stockArray.push({ upc: e[0], count: e[1] });
   }
 
-  fetch(POST_SUBMISSION, {
+  return fetch(POST_SUBMISSION, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -18,13 +16,20 @@ export const saveStocktake = (userId, fixtureId, stocks, success, fail) => {
       stocks: stockArray
     })
   })
-    .then(res => res.text())
     .then(res => {
-      console.log(res);
-      success();
+      if (res.status === 200) {
+        success();
+        return null;
+      }
+      return res.text();
+    })
+    .then(text => {
+      if (text !== null) {
+        throw new Error(text);
+      }
     })
     .catch(err => {
       console.log(err);
-      fail();
+      fail(err);
     });
 };

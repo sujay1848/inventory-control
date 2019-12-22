@@ -4,18 +4,14 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { scanFixture, scanSkus } from "../StateManagement/Actions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { EditableTable } from "./EditableTable";
 import { saveStocktake } from "../ControllerInteface/ApiCaller";
-import {toast} from "react-toastify";
+import Swal from "sweetalert2";
 
 const mapStateToProps = state => {
   return {
     fixtureId: state.fixtureId,
-    skuCountList: state.skuCountList,
-    userId: state.userId
+    skuCountList: state.skuCountList
   };
 };
 
@@ -26,73 +22,68 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const toastSuccess = () => toast.success("💾  Successfully Saved", {
-  position: "bottom-right",
-  autoClose: 3000,
-  hideProgressBar: true,
-  closeOnClick: true,
-  pauseOnHover: false,
-  draggable: true
-});
-
-const toastFailure = () => toast.error("🚫  Failed to connect", {
-  position: "bottom-right",
-  autoClose: 3000,
-  hideProgressBar: true,
-  closeOnClick: true,
-  pauseOnHover: false,
-  draggable: true
-});
-
 export class ConnectedReviewPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dialogOpen: false
-    };
   }
 
-  submitCount = () => {
-    console.log(this.props.skuCountList);
-    let { userId, fixtureId, skuCountList } = this.props;
-    saveStocktake(userId, fixtureId, skuCountList, toastSuccess, toastFailure);
-    this.props.setSkuCountList({});
-    this.props.setFixtureId({});
+  clearState = () => {
+    this.props.setSkuCountList({ skuCountList: {} });
+    this.props.setFixtureId({ fixtureId: null });
+  };
+
+  // First popup for submission confirmation
+  onClickSubmit = () => {
+    Swal.fire({
+      title: "Submission",
+      text: "Enter your employee ID",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off"
+      },
+      showCloseButton: true,
+      confirmButtonText: "Confirm",
+      showLoaderOnConfirm: true,
+      preConfirm: this.onClickSubmitEmployeeId,
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then(result => {
+      if (result.value) {
+        this.onSuccessSubmission();
+      }
+    });
+  };
+
+  onClickSubmitEmployeeId = userid => {
+    let { fixtureId, skuCountList } = this.props;
+    return saveStocktake(
+      userid,
+      fixtureId,
+      skuCountList,
+      () => {},
+      err => Swal.showValidationMessage(`${err}`)
+    );
+  };
+
+  onSuccessSubmission = () => {
+    Swal.fire({
+      title: "Successful!",
+      text: "The records has been submitted.",
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Start New Count",
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then(result => {
+      if (result.value) {
+        // Link to count start page by clearing all scanned records
+        this.clearState();
+      }
+    });
   };
 
   disableButton = () =>
     !this.props.skuCountList ||
     Object.entries(this.props.skuCountList).length === 0;
-
-  getDialogBox() {
-    return (
-      <Dialog
-        open={this.state.dialogOpen}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Finished scanning?"}
-        </DialogTitle>
-        <DialogActions>
-          <Button onClick={this.submitCount} color="primary">
-            Yes
-          </Button>
-          <Button
-            onClick={() => {
-              this.setState({
-                dialogOpen: false
-              });
-            }}
-            color="primary"
-            autoFocus
-          >
-            No
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  }
 
   render() {
     if (!this.props.fixtureId) {
@@ -117,16 +108,11 @@ export class ConnectedReviewPage extends Component {
               style={{ width: "100%", marginBottom: 10 }}
               disabled={this.disableButton()}
               variant="contained"
-              onClick={() => {
-                this.setState({
-                  dialogOpen: true
-                });
-              }}
+              onClick={this.onClickSubmit}
               color="primary"
             >
               Submit
             </Button>
-            <div>{this.getDialogBox()}</div>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Redirect } from "react-router";
 import { scanSkus } from "../StateManagement/Actions";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -141,13 +141,13 @@ export class ConnectedScanPage extends Component {
 
   onClickClear = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
       showCloseButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, clear it!'
-    }).then((result) => {
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Yes, clear it!"
+    }).then(result => {
       if (result.value) {
         this.resetState();
       }
