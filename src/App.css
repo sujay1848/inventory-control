@@ -22,5 +22,9 @@
 }
 
 .noLink {
-  text-Decoration: none
+  text-Decoration: none;
+}
+
+.hidden {
+  visibility: hidden;
 }

@@ -19,49 +19,41 @@ export class EditableTable extends Component {
     this.props.setSkuCountList({ skuCountList: list });
   };
 
+  isSelected = key => key === this.state.selectedKey;
+
   tableRow = data => {
-    let row;
-    if (data[0] === this.state.selectedKey) {
-      row = (
-        <TableRow key={data[0]} selected={true}>
-          <TableCell align="center">{data[0]}</TableCell>
-          <TableCell align="center">
-            <button
-              className="b--none bg-transparent f3 mr2"
-              onClick={() => this.onCountChange(data, 1)}
-            >
-              +
-            </button>
-            {data[1]}
-            {data[1] > 1 ? (
-              <button
-                className="b--none bg-transparent f3 ml2"
-                onClick={() => this.onCountChange(data, -1)}
-              >
-                -
-              </button>
-            ) : (
-              <button className="b--none bg-transparent f3 ml2" disabled>
-                -
-              </button>
-            )}
-          </TableCell>
-        </TableRow>
-      );
-    } else {
-      row = (
-        <TableRow
-          key={data[0]}
-          onClick={() => {
-            this.setState({ selectedKey: data[0] });
-          }}
-        >
-          <TableCell align="center">{data[0]}</TableCell>
-          <TableCell align="center">{data[1]}</TableCell>
-        </TableRow>
-      );
-    }
-    return row;
+    return (
+      <TableRow
+        key={data[0]}
+        selected={this.isSelected(data[0])}
+        onClick={() => {
+          this.setState({ selectedKey: data[0] });
+        }}
+      >
+        <TableCell align="center">{data[0]}</TableCell>
+        <TableCell align="center">
+          <button
+            className={
+              "b--none bg-transparent f3 mr2" +
+              (this.isSelected(data[0]) ? "" : " hidden")
+            }
+            onClick={() => this.onCountChange(data, 1)}
+          >
+            +
+          </button>
+          {data[1]}
+          <button
+            className={
+              "b--none bg-transparent f3 ml2" +
+              (this.isSelected(data[0]) && data[1] > 1 ? "" : " hidden")
+            }
+            onClick={() => this.onCountChange(data, -1)}
+          >
+            -
+          </button>
+        </TableCell>
+      </TableRow>
+    );
   };
 
   render() {
