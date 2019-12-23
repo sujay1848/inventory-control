@@ -22,7 +22,11 @@ function rootReducer(state = initialState, action) {
       skuCountList: action.payload.skuCountList
     });
   } else if (action.type === ACTION_CONSTANTS.SCAN_FIXTURE) {
-    localStorage.setItem(FIXTURE_ID, action.payload.fixtureId);
+    if (action.payload.fixtureId === null) {
+      localStorage.removeItem(FIXTURE_ID);
+    } else {
+      localStorage.setItem(FIXTURE_ID, action.payload.fixtureId);
+    }
     return Object.assign({}, state, {
       fixtureId: action.payload.fixtureId
     });
