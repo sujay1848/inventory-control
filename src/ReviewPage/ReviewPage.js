@@ -23,10 +23,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export class ConnectedReviewPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   clearState = () => {
     this.props.setSkuCountList({ skuCountList: {} });
     this.props.setFixtureId({ fixtureId: null });

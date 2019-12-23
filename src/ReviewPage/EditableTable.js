@@ -5,6 +5,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Table from "@material-ui/core/Table";
 import Bin from "../Img/delete.svg";
+import Swal from "sweetalert2";
 
 export class EditableTable extends Component {
   constructor(props) {
@@ -27,6 +28,21 @@ export class EditableTable extends Component {
     // Overwrite the setting of selectedKey from TableRow onClick
     setTimeout(() => this.setState({ selectedKey: null }), 50);
   };
+
+  onClickDelete = (key) => {
+    Swal.fire({
+      title: "Delete?",
+      text: "SKU " + key,
+      icon: "warning",
+      showCloseButton: true,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Confirm"
+    }).then(result => {
+      if (result.value) {
+        this.onRemoveSku(key);
+      }
+    });
+  }
 
   isSelected = key => key === this.state.selectedKey;
 
@@ -69,7 +85,7 @@ export class EditableTable extends Component {
                 type="image"
                 src={Bin}
                 alt="bin"
-                onClick={() => this.onRemoveSku(data[0])}
+                onClick={() => this.onClickDelete(data[0])}
                 className={
                   "h1 w-auto" + (this.isSelected(data[0]) ? "" : " hidden")
                 }
