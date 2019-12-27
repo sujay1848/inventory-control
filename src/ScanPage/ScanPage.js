@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import HeaderBar from "../CommonComponents/HeaderBar.js";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -116,7 +115,6 @@ export class ConnectedScanPage extends Component {
     }
     return (
       <div>
-        <HeaderBar title="Inventory Control" />
         <div className="flex flex-column ma3">
           <div className="flex justify-between">
             <div className="ma2">

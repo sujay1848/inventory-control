@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import HeaderBar from "../CommonComponents/HeaderBar.js";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -87,7 +86,6 @@ export class ConnectedReviewPage extends Component {
     }
     return (
       <div>
-        <HeaderBar title="Inventory Control" />
         <div className="flex flex-column ma3">
           <div className="flex ma2">
             <span className="f4 mr2">FIXTURE ID:</span>

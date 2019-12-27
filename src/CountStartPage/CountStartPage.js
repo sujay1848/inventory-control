@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
-import HeaderBar from "../CommonComponents/HeaderBar.js";
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId };
@@ -17,7 +16,6 @@ class ConnectedCountStartPage extends Component {
 
     return (
       <div>
-        <HeaderBar title="Inventory Control" />
         <div className="ma2">
           <span className="f4 mr2">FIXTURE ID:</span>
           <span className="underline f4">{this.props.fixtureId}</span>
