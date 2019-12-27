@@ -176,6 +176,7 @@ export class ConnectedScanPage extends Component {
           <EditableTable
             skuCountList={this.props.skuCountList}
             setSkuCountList={this.props.setSkuCountList}
+            afterDelete={this.returnFocus}
           />
         </div>
       </div>

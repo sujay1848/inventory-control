@@ -40,6 +40,7 @@ export class EditableTable extends Component {
     }).then(result => {
       if (result.value) {
         this.onRemoveSku(key);
+        if (this.props.afterDelete) this.props.afterDelete();
       }
     });
   }
