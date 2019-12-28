@@ -75,7 +75,9 @@ export class ConnectedScanPage extends Component {
   handleSkuSaveWithId = skuId => {
     let skuList = Object.assign({}, this.props.skuCountList);
     if (skuList[skuId]) {
-      skuList[skuId] = skuList[skuId] + 1;
+      let count = skuList[skuId];
+      delete skuList[skuId];
+      skuList[skuId] = count + 1;
     } else if (skuId) {
       skuList[skuId] = 1;
     }
