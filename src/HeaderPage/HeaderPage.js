@@ -20,8 +20,7 @@ class ConnectedHeaderPage extends Component {
   handleFixtureIdChange = event =>
     this.setState({ fixtureId: event.target.value });
   handleSubmit = event => {
-    const { fixtureId } = this.state;
-    this.props.setFixture({ fixtureId });
+    this.props.setFixture({ fixtureId: this.state.fixtureId });
   };
   isButtonDisabled = () => !this.state.fixtureId;
 
@@ -37,7 +36,12 @@ class ConnectedHeaderPage extends Component {
             variant="outlined"
             onChange={this.handleFixtureIdChange}
           />
-          <Link to="/start" className="noLink">
+          <Link
+            to={location =>
+              this.isButtonDisabled() ? location.pathname : "/start"
+            }
+            className="noLink"
+          >
             <Button
               disabled={this.isButtonDisabled()}
               className="w-100"

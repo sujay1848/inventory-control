@@ -162,7 +162,7 @@ export class ConnectedScanPage extends Component {
             >
               Clear
             </Button>
-            <Link to="/review" className="noLink">
+            <Link to={(location) => this.disableButton() ? location.pathname : "/review"} className="noLink">
               <Button
                 style={{ width: "100%", marginBottom: 10 }}
                 disabled={this.disableButton()}
