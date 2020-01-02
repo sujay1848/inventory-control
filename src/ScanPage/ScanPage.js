@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -24,20 +24,12 @@ export class ConnectedScanPage extends Component {
   constructor(props) {
     super(props);
     this.textField = React.createRef();
+    this.textInput = React.createRef();
     this.state = {
       currentSku: "",
       scannerMode: true
     };
   }
-
-  handleSkuIdChange = event => {
-    this.setState({
-      currentSku: event.target.value
-    });
-    if (this.state.scannerMode) {
-      this.handleSkuSaveWithId(event.target.value);
-    }
-  };
 
   resetState = () => {
     this.setState({
@@ -48,15 +40,8 @@ export class ConnectedScanPage extends Component {
   };
 
   returnFocus = () => {
-    if (this.textField.current == null) return;
-    this.textField.current.focus();
-    if (this.state.scannerMode) {
-      // Hide virtual keyboard
-      this.textField.current.setAttribute("readonly", true);
-      setTimeout(() => {
-        this.textField.current.removeAttribute("readonly");
-      }, 100);
-    }
+    if (this.textInput.current == null) return;
+    this.textInput.current.returnFocus();
   };
 
   handleSwitchToggle = () => {
@@ -66,10 +51,6 @@ export class ConnectedScanPage extends Component {
       },
       this.returnFocus
     );
-  };
-
-  handleSkuSave = () => {
-    this.handleSkuSaveWithId(this.state.currentSku);
   };
 
   handleSkuSaveWithId = skuId => {
@@ -118,29 +99,18 @@ export class ConnectedScanPage extends Component {
     return (
       <div>
         <div className="flex flex-column ma3">
-          <HeaderMenu scannerMode={this.state.scannerMode} handleSwitchToggle={this.handleSwitchToggle}/>
-
-          <TextField
-            id="outlined-name"
-            label="CSKU ID"
-            margin="normal"
-            variant="outlined"
-            autoFocus
-            inputRef={this.textField}
-            value={this.state.currentSku}
-            onChange={this.handleSkuIdChange}
-            onClick={this.returnFocus}
+          <HeaderMenu
+            scannerMode={this.state.scannerMode}
+            handleSwitchToggle={this.handleSwitchToggle}
+            fixtureId={this.props.fixtureId}
           />
+          <ScanController
+            ref={this.textInput}
+            scannerMode={this.state.scannerMode}
+            saveUpc={this.handleSkuSaveWithId}
+          />
+
           <div className="flex flex-column">
-            <Button
-              style={{ width: "100%", marginBottom: 20 }}
-              variant="contained"
-              color="secondary"
-              disabled={this.isScanDisabled()}
-              onClick={this.handleSkuSave}
-            >
-              Enter
-            </Button>
             <Button
               style={{ width: "100%", marginBottom: 10 }}
               variant="contained"
