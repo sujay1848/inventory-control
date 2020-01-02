@@ -3,12 +3,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Redirect } from "react-router";
 import { scanSkus } from "../StateManagement/Actions";
 import Swal from "sweetalert2";
 import { EditableTable } from "../ReviewPage/EditableTable";
+import HeaderMenu from "./HeaderMenu";
+import ScanController from "./ScanController";
 
 const mapStateToProps = state => {
   return { fixtureId: state.fixtureId, skuCountList: state.skuCountList };
@@ -118,21 +118,8 @@ export class ConnectedScanPage extends Component {
     return (
       <div>
         <div className="flex flex-column ma3">
-          <div className="flex justify-between">
-            <div className="ma2">
-              <span className="f4 mr2">FIXTURE ID:</span>
-              <span className="underline f4">{this.props.fixtureId}</span>
-            </div>
-            <FormControlLabel
-              control={
-                <Switch
-                  onChange={this.handleSwitchToggle}
-                  checked={this.state.scannerMode}
-                />
-              }
-              label="Scanner Mode"
-            />
-          </div>
+          <HeaderMenu scannerMode={this.state.scannerMode} handleSwitchToggle={this.handleSwitchToggle}/>
+
           <TextField
             id="outlined-name"
             label="CSKU ID"
@@ -162,7 +149,12 @@ export class ConnectedScanPage extends Component {
             >
               Clear
             </Button>
-            <Link to={(location) => this.disableButton() ? location.pathname : "/review"} className="noLink">
+            <Link
+              to={location =>
+                this.disableButton() ? location.pathname : "/review"
+              }
+              className="noLink"
+            >
               <Button
                 style={{ width: "100%", marginBottom: 10 }}
                 disabled={this.disableButton()}
@@ -173,6 +165,7 @@ export class ConnectedScanPage extends Component {
               </Button>
             </Link>
           </div>
+
           <EditableTable
             skuCountList={this.props.skuCountList}
             setSkuCountList={this.props.setSkuCountList}
