@@ -20,7 +20,7 @@ class SwitchButton extends Component {
 
   render() {
     return this.state.selected ? (
-      <div className="h2 w3 br2 bg-blue flex justify-center items-center">
+      <div className="h2 w3 br2 bg-light-blue flex justify-center items-center">
         <button className="w-90 h-75 br2 bn bg-white" onClick={this.onClick}>
           <img
             src={this.props.selectedIcon}
@@ -30,7 +30,7 @@ class SwitchButton extends Component {
         </button>
       </div>
     ) : (
-      <button className="h2 w3 br2 bg-blue b--blue" onClick={this.onClick}>
+      <button className="h2 w3 br2 bn bg-blue b--blue" onClick={this.onClick}>
         <img
           src={this.props.unselectedIcon}
           alt="barcode"
