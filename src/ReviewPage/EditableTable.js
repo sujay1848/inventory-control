@@ -159,59 +159,59 @@ export class EditableTable extends Component {
 
     return (
       <React.Fragment>
-        <div className="w-100 flex-column">
-          <div className="w-100 h2 flex items-center bg-light-gray">
+        <div className="w-100 flex-column mv2">
+          <div className="w-100 h2 flex items-center bg-light-gray bb b--black-20">
             <div className="w-50 tc f5 b">UPC</div>
             <div className="w-50 tc f5 b">Quantity</div>
           </div>
 
           {viewableList.map(tuple => this.row(tuple))}
-        </div>
 
-        {totalPage > 0 && (
-          <div className="flex justify-center items-center helvetica pa2 bg-light-gray mb2">
-            <input
-              type="button"
-              className={
-                "b--none bg-transparent f5 b" +
-                (this.state.page < 2 ? " hidden" : "")
-              }
-              value="|<"
-              onClick={() => this.setState({ page: 1 })}
-            />
-            <input
-              type="button"
-              className={
-                "b--none bg-transparent f5 b" +
-                (this.state.page < 2 ? " hidden" : "")
-              }
-              value="<"
-              onClick={() => this.setState({ page: this.state.page - 1 })}
-            />
-            <span className="f5">
-              {" "}
-              {this.state.page} / {totalPage} page{" "}
-            </span>
-            <input
-              type="button"
-              className={
-                "b--none bg-transparent f5 b" +
-                (this.state.page === totalPage ? " hidden" : "")
-              }
-              value=">"
-              onClick={() => this.setState({ page: this.state.page + 1 })}
-            />
-            <input
-              type="button"
-              className={
-                "b--none bg-transparent f5 b" +
-                (this.state.page === totalPage ? " hidden" : "")
-              }
-              value=">|"
-              onClick={() => this.setState({ page: totalPage })}
-            />
-          </div>
-        )}
+          {totalPage > 0 && (
+            <div className="flex justify-center items-center helvetica pa2 bg-light-gray mb2">
+              <input
+                type="button"
+                className={
+                  "b--none bg-transparent f5 b" +
+                  (this.state.page < 2 ? " hidden" : "")
+                }
+                value="|<"
+                onClick={() => this.setState({ page: 1 })}
+              />
+              <input
+                type="button"
+                className={
+                  "b--none bg-transparent f5 b" +
+                  (this.state.page < 2 ? " hidden" : "")
+                }
+                value="<"
+                onClick={() => this.setState({ page: this.state.page - 1 })}
+              />
+              <span className="f5">
+                {" "}
+                {this.state.page} / {totalPage} page{" "}
+              </span>
+              <input
+                type="button"
+                className={
+                  "b--none bg-transparent f5 b" +
+                  (this.state.page === totalPage ? " hidden" : "")
+                }
+                value=">"
+                onClick={() => this.setState({ page: this.state.page + 1 })}
+              />
+              <input
+                type="button"
+                className={
+                  "b--none bg-transparent f5 b" +
+                  (this.state.page === totalPage ? " hidden" : "")
+                }
+                value=">|"
+                onClick={() => this.setState({ page: totalPage })}
+              />
+            </div>
+          )}
+        </div>
       </React.Fragment>
     );
   }

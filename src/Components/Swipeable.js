@@ -25,22 +25,22 @@ export class Swipeable extends Component {
     let x = event.touches[0].clientX;
     console.log(x - this.x);
     if (x - this.x > 80) {
-      console.log("Swipe right");
-      if (this.state.position === this.POSITIONS.NEUTRAL) {
-        this.setState(
+        this.x = x;
+        if (this.state.position === this.POSITIONS.NEUTRAL) {
+          this.setState(
           { position: this.POSITIONS.RIGHT },
           this.props.onRightSwipe
         );
       } else if (this.state.position === this.POSITIONS.LEFT) {
-        this.setState(
+          this.setState(
           { position: this.POSITIONS.NEUTRAL },
           this.props.onNeutral
         );
       }
     } else if (x - this.x < -80) {
-      console.log("Swipe left");
-      if (this.state.position === this.POSITIONS.NEUTRAL) {
-        this.setState(
+        this.x = x;
+        if (this.state.position === this.POSITIONS.NEUTRAL) {
+          this.setState(
           { position: this.POSITIONS.LEFT },
           this.props.onLeftSwipe
         );

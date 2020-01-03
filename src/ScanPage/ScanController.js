@@ -45,7 +45,7 @@ class ScanController extends Component {
           ref={this.textField}
           onChange={this.handleTextChange}
           onClick={this.returnFocus}
-          className="w-100 h2 mb1 br2"
+          className="w-100 h2 mb1 br2 ph1"
         />
         <input
           type="button"
