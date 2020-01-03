@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import memoize from "memoize-one";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import Table from "@material-ui/core/Table";
-import Bin from "../Img/delete.svg";
 import Swal from "sweetalert2";
+import { Swipeable } from "../Components/Swipeable";
 
 export class EditableTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedKey: null,
+      selectedOperation: null,
       page: 1,
       searchField: 0,
       searchTerm: ""
@@ -21,6 +17,11 @@ export class EditableTable extends Component {
 
   // Number of items per page
   vol = 5;
+
+  OPERATIONS = {
+    ADJUST: "adjust",
+    DELETE: "delete"
+  };
 
   filerSkuList = memoize((list, keyword, field) => {
     list = Object.entries(list).reverse();
@@ -70,58 +71,66 @@ export class EditableTable extends Component {
     });
   };
 
-  isSelected = key => key === this.state.selectedKey;
+  setSearchTerm = term => this.setState({ searchTerm: term });
 
-  setSearchTerm = (term) => this.setState({searchTerm : term});
-
-  tableRow = data => {
+  row = data => {
     return (
-      <TableRow
+      <Swipeable
         key={data[0]}
-        selected={this.isSelected(data[0])}
-        onClick={() => {
-          this.setState({ selectedKey: data[0] });
-        }}
+        className="w-100 h3 flex items-center bb b--black-20"
+        onRightSwipe={() =>
+          this.setState({
+            selectedKey: data[0],
+            selectedOperation: this.OPERATIONS.ADJUST
+          })
+        }
+        onLeftSwipe={() =>
+          this.setState({
+            selectedKey: data[0],
+            selectedOperation: this.OPERATIONS.DELETE
+          })
+        }
+        onNeutral={() =>
+          this.setState({ selectedKey: null, selectedOperation: null })
+        }
       >
-        <TableCell align="center">{data[0]}</TableCell>
-        <TableCell align="center">
-          <div className="flex justify-between items-center">
-            <div className=""></div>
-            <div className="flex items-center">
+        <div className="w-50 tc">{data[0]}</div>
+
+        <div className="w-50 flex justify-around items-center">
+          {this.state.selectedKey !== data[0] && (
+            <span className="">{data[1]}</span>
+          )}
+          {this.state.selectedKey === data[0] &&
+            this.state.selectedOperation === this.OPERATIONS.DELETE && (
               <button
-                className={
-                  "b--none bg-transparent f3 mr2" +
-                  (this.isSelected(data[0]) ? "" : " hidden")
-                }
-                onClick={() => this.onCountChange(data, 1)}
-              >
-                +
-              </button>
-              <span>{data[1]}</span>
-              <button
-                className={
-                  "b--none bg-transparent f3 ml2" +
-                  (this.isSelected(data[0]) && data[1] > 1 ? "" : " hidden")
-                }
-                onClick={() => this.onCountChange(data, -1)}
-              >
-                -
-              </button>
-            </div>
-            <div className="flex items-center">
-              <input
-                type="image"
-                src={Bin}
-                alt="bin"
+                className="w-80 h2 br2 bn bg-dark-red white b"
                 onClick={() => this.onClickDelete(data[0])}
-                className={
-                  "h1 w-auto" + (this.isSelected(data[0]) ? "" : " hidden")
-                }
-              />
-            </div>
-          </div>
-        </TableCell>
-      </TableRow>
+              >
+                Delete
+              </button>
+            )}
+          {this.state.selectedKey === data[0] &&
+            this.state.selectedOperation === this.OPERATIONS.ADJUST && (
+              <React.Fragment>
+                <button
+                  className="bn bg-white f3 b"
+                  onClick={() => this.onCountChange(data, 1)}
+                >
+                  +
+                </button>
+                <span>{data[1]}</span>
+                <button
+                  className={
+                    "bn bg-white f3 b" + (data[1] < 2 ? " hidden" : "")
+                  }
+                  onClick={() => this.onCountChange(data, -1)}
+                >
+                  -
+                </button>
+              </React.Fragment>
+            )}
+        </div>
+      </Swipeable>
     );
   };
 
@@ -150,21 +159,15 @@ export class EditableTable extends Component {
 
     return (
       <React.Fragment>
-        <Table stickyHeader>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">
-                <span className="f5 b">SKU ID</span>
-              </TableCell>
-              <TableCell align="center">
-                <span className="f5 b">Count</span>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {viewableList.map(tuple => this.tableRow(tuple))}
-          </TableBody>
-        </Table>
+        <div className="w-100 flex-column">
+          <div className="w-100 h2 flex items-center bg-light-gray">
+            <div className="w-50 tc f5 b">UPC</div>
+            <div className="w-50 tc f5 b">Quantity</div>
+          </div>
+
+          {viewableList.map(tuple => this.row(tuple))}
+        </div>
+
         {totalPage > 0 && (
           <div className="flex justify-center items-center helvetica pa2 bg-light-gray mb2">
             <input

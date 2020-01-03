@@ -22,6 +22,7 @@ export class ConnectedScanPage extends Component {
   constructor(props) {
     super(props);
     this.textInput = React.createRef();
+    this.EditableTable = React.createRef();
     this.state = {
       scannerMode: true
     };
@@ -58,6 +59,8 @@ export class ConnectedScanPage extends Component {
     !this.props.skuCountList ||
     Object.entries(this.props.skuCountList).length === 0;
 
+  setSearchTerm = term => this.EditableTable.current.setSearchTerm(term);
+
   onClickClear = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -93,6 +96,7 @@ export class ConnectedScanPage extends Component {
             skuCountList={this.props.skuCountList}
             setSkuCountList={this.props.setSkuCountList}
             afterDelete={this.returnFocus}
+            ref={this.EditableTable}
           />
           <ScanController
             ref={this.textInput}
