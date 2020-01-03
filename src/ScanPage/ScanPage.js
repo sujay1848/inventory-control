@@ -21,7 +21,6 @@ function mapDispatchToProps(dispatch) {
 export class ConnectedScanPage extends Component {
   constructor(props) {
     super(props);
-    this.textField = React.createRef();
     this.textInput = React.createRef();
     this.state = {
       scannerMode: true
@@ -82,7 +81,6 @@ export class ConnectedScanPage extends Component {
     if (!this.props.fixtureId) {
       return <Redirect push to="/" />;
     }
-    console.log(this.state.scannerMode);
     return (
       <div>
         <div className="flex flex-column ma3">
