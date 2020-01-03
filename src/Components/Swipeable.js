@@ -23,7 +23,6 @@ export class Swipeable extends Component {
 
   onTouchMove = event => {
     let x = event.touches[0].clientX;
-    console.log(x - this.x);
     if (x - this.x > 80) {
         this.x = x;
         if (this.state.position === this.POSITIONS.NEUTRAL) {
