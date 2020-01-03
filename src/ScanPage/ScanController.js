@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 
 class ScanController extends Component {
   constructor(props) {
@@ -39,28 +37,24 @@ class ScanController extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <TextField
-          id="outlined-name"
-          label="UPC"
-          margin="normal"
-          variant="outlined"
+      <div className="w-100 flex flex-column mv2">
+        <input
+          type="text"
+          placeholder="Type product barcode here..."
           value={this.state.text}
-          autoFocus
-          inputRef={this.textField}
+          ref={this.textField}
           onChange={this.handleTextChange}
           onClick={this.returnFocus}
+          className="w-100 h2 mb1 br2"
         />
-        <Button
-          style={{ width: "100%", marginBottom: 20 }}
-          variant="contained"
-          color="secondary"
-          disabled={this.state.text === ""}
+        <input
+          type="button"
+          value="ENTER"
+          className="w-100 f5 b bg-green white bw0 br2 dim h2"
           onClick={() => this.onSubmit(this.state.text)}
-        >
-          Enter
-        </Button>
-      </React.Fragment>
+          disabled={this.state.text === ""}
+        />
+      </div>
     );
   }
 }

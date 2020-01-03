@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
@@ -26,15 +24,11 @@ export class ConnectedScanPage extends Component {
     this.textField = React.createRef();
     this.textInput = React.createRef();
     this.state = {
-      currentSku: "",
       scannerMode: true
     };
   }
 
   resetState = () => {
-    this.setState({
-      currentSku: ""
-    });
     this.props.setSkuCountList({ skuCountList: {} });
     this.returnFocus();
   };
@@ -62,12 +56,9 @@ export class ConnectedScanPage extends Component {
     } else if (skuId) {
       skuList[skuId] = 1;
     }
-    this.setState({ currentSku: "" });
     this.props.setSkuCountList({ skuCountList: skuList });
     this.returnFocus();
   };
-
-  isScanDisabled = () => this.state.scannerMode || !this.state.currentSku;
 
   disableButton = () =>
     !this.props.skuCountList ||
@@ -104,43 +95,43 @@ export class ConnectedScanPage extends Component {
             handleSwitchToggle={this.handleSwitchToggle}
             fixtureId={this.props.fixtureId}
           />
-          <ScanController
-            ref={this.textInput}
-            scannerMode={this.state.scannerMode}
-            saveUpc={this.handleSkuSaveWithId}
-          />
-
-          <div className="flex flex-column">
-            <Button
-              style={{ width: "100%", marginBottom: 10 }}
-              variant="contained"
-              color="secondary"
-              onClick={this.onClickClear}
-            >
-              Clear
-            </Button>
-            <Link
-              to={location =>
-                this.disableButton() ? location.pathname : "/review"
-              }
-              className="noLink"
-            >
-              <Button
-                style={{ width: "100%", marginBottom: 10 }}
-                disabled={this.disableButton()}
-                variant="contained"
-                color="primary"
-              >
-                Review
-              </Button>
-            </Link>
-          </div>
-
           <EditableTable
             skuCountList={this.props.skuCountList}
             setSkuCountList={this.props.setSkuCountList}
             afterDelete={this.returnFocus}
           />
+          <ScanController
+            ref={this.textInput}
+            scannerMode={this.state.scannerMode}
+            saveUpc={this.handleSkuSaveWithId}
+          />
+          <div className="flex w-100">
+            <input
+              type="button"
+              value="CLEAR"
+              className={
+                "flex-grow-1 f5 b white bw0 h2 br2 mr1" +
+                (this.disableButton() ? "" : " bg-dark-red")
+              }
+              onClick={this.onClickClear}
+              disabled={this.disableButton()}
+            />
+            <Link
+              to={location =>
+                this.disableButton() ? location.pathname : "/review"
+              }
+              className="noLink flex-grow-1 ml1"
+            >
+              <input
+                type="button"
+                value="REVIEW"
+                className={
+                  "w-100 f5 b white bw0 h2 br2" +
+                  (this.disableButton() ? "" : " bg-blue")
+                }
+              />
+            </Link>
+          </div>
         </div>
       </div>
     );
