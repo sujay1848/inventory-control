@@ -38,13 +38,8 @@ export class ConnectedScanPage extends Component {
     this.textInput.current.returnFocus();
   };
 
-  handleSwitchToggle = () => {
-    this.setState(
-      {
-        scannerMode: !this.state.scannerMode
-      },
-      this.returnFocus
-    );
+  setScannerMode = mode => {
+    this.setState({ scannerMode: mode });
   };
 
   handleSkuSaveWithId = skuId => {
@@ -87,12 +82,13 @@ export class ConnectedScanPage extends Component {
     if (!this.props.fixtureId) {
       return <Redirect push to="/" />;
     }
+    console.log(this.state.scannerMode);
     return (
       <div>
         <div className="flex flex-column ma3">
           <HeaderMenu
             scannerMode={this.state.scannerMode}
-            handleSwitchToggle={this.handleSwitchToggle}
+            setScannerMode={this.setScannerMode}
             fixtureId={this.props.fixtureId}
           />
           <EditableTable
