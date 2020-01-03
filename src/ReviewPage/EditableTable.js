@@ -72,6 +72,8 @@ export class EditableTable extends Component {
 
   isSelected = key => key === this.state.selectedKey;
 
+  setSearchTerm = (term) => this.setState({searchTerm : term});
+
   tableRow = data => {
     return (
       <TableRow
@@ -148,30 +150,6 @@ export class EditableTable extends Component {
 
     return (
       <React.Fragment>
-        <div className="flex items-center justify-end pa1">
-          <select
-            id="search-select"
-            className="w-30 h-100"
-            onChange={event =>
-              this.setState({ searchField: event.target.selectedIndex })
-            }
-          >
-            <option value="sku" className="">
-              Sku
-            </option>
-            <option value="count" className="">
-              Count
-            </option>
-          </select>
-          <input
-            type="text"
-            className="w-70 h-100"
-            placeholder="Search Term"
-            onChange={event =>
-              this.setState({ searchTerm: event.target.value })
-            }
-          />
-        </div>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
