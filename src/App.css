@@ -28,3 +28,7 @@
 .hidden {
   visibility: hidden;
 }
+
+*:focus {
+  outline: none;
+}

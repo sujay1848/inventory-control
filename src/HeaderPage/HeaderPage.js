@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setFixture } from "../StateManagement/Actions";
@@ -50,16 +49,16 @@ class ConnectedHeaderPage extends Component {
             }
             className="noLink"
           >
-            <Button
+            <button
+              className={
+                "w-100 f5 b white bw0 br2 dim h2" +
+                (this.isButtonDisabled() ? "" : " bg-blue")
+              }
               disabled={this.isButtonDisabled()}
-              className="w-100"
-              fullWidth={true}
-              variant="contained"
-              color="secondary"
               onClick={this.handleSubmit}
             >
-              Proceed
-            </Button>
+              PROCEED
+            </button>
           </Link>
         </div>
 

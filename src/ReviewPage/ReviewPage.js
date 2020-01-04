@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { setFixture, scanSkus } from "../StateManagement/Actions";
@@ -98,15 +97,16 @@ export class ConnectedReviewPage extends Component {
             />
           </div>
           <div className="flex flex-column">
-            <Button
-              style={{ width: "100%", marginBottom: 10 }}
+            <button
+              className={
+                "w-100 f5 b white bw0 h2 br2" +
+                (this.disableButton() ? "" : " bg-blue")
+              }
               disabled={this.disableButton()}
-              variant="contained"
               onClick={this.onClickSubmit}
-              color="primary"
             >
-              Submit
-            </Button>
+              SUBMIT
+            </button>
           </div>
         </div>
       </div>
