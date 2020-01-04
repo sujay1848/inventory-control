@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setFixture } from "../StateManagement/Actions";
+import { ViewTable } from "./ViewTable";
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -15,6 +16,13 @@ class ConnectedHeaderPage extends Component {
   constructor(props) {
     super(props);
     this.state = { fixtureId: null };
+    this.mockData = [
+      { fixtureId: "A01", count: 2 },
+      { fixtureId: "A02", count: 0 },
+      { fixtureId: "A03", count: 4 }
+    ];
+    this.mockHeader = ["fixtureId", "count"];
+    this.mockDisplayHeader = ["Fixture Id", "Stocktake Completed"];
   }
 
   handleFixtureIdChange = event =>
@@ -54,6 +62,12 @@ class ConnectedHeaderPage extends Component {
             </Button>
           </Link>
         </div>
+
+        <ViewTable
+          data={this.mockData}
+          labels={this.mockDisplayHeader}
+          headers={this.mockHeader}
+        />
       </div>
     );
   }
