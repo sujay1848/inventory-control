@@ -50,7 +50,10 @@ class ScanController extends Component {
         <input
           type="button"
           value="ENTER"
-          className={"w-100 f5 b white bw0 br2 dim h2" + (this.state.text === "" ? "" : " bg-green")}
+          className={
+            "w-100 f5 b white bw0 br2 dim h2" +
+            (this.state.text === "" ? "" : " bg-green")
+          }
           onClick={() => this.onSubmit(this.state.text)}
           disabled={this.state.text === ""}
         />
