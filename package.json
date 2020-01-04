@@ -4,8 +4,6 @@
   "private": true,
   "homepage": "https://junrong09.github.io/inventory-control",
   "dependencies": {
-    "@material-ui/core": "^4.5.1",
-    "@material-ui/icons": "^4.5.1",
     "memoize-one": "^5.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

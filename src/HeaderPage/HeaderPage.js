@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setFixture } from "../StateManagement/Actions";
@@ -35,13 +34,11 @@ class ConnectedHeaderPage extends Component {
     return (
       <div>
         <div className="flex flex-column ma3">
-          <TextField
-            autoFocus
-            id="outlined-name"
-            label="Fixture ID"
-            margin="normal"
-            variant="outlined"
+          <input
+            type="text"
+            placeholder="Type fixture ID here..."
             onChange={this.handleFixtureIdChange}
+            className="w-100 h2 mb2 br2 ph1"
           />
           <Link
             to={location =>
