@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setFixture } from "../StateManagement/Actions";
 import { ViewTable } from "./ViewTable";
+import { getStatus } from "../ControllerInteface/ApiCaller";
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -13,14 +14,10 @@ function mapDispatchToProps(dispatch) {
 class ConnectedHeaderPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { fixtureId: null };
-    this.mockData = [
-      { fixtureId: "A01", count: 2 },
-      { fixtureId: "A02", count: 0 },
-      { fixtureId: "A03", count: 4 }
-    ];
-    this.mockHeader = ["fixtureId", "count"];
-    this.mockDisplayHeader = ["Fixture Id", "Stocktake Completed"];
+    this.state = {
+      fixtureId: null,
+      status: []
+    };
   }
 
   handleFixtureIdChange = event =>
@@ -29,6 +26,10 @@ class ConnectedHeaderPage extends Component {
     this.props.setFixture({ fixtureId: this.state.fixtureId });
   };
   isButtonDisabled = () => !this.state.fixtureId;
+
+  componentDidMount() {
+    getStatus(status => this.setState({ status: status }));
+  }
 
   render() {
     return (
@@ -60,9 +61,7 @@ class ConnectedHeaderPage extends Component {
         </div>
 
         <ViewTable
-          data={this.mockData}
-          labels={this.mockDisplayHeader}
-          headers={this.mockHeader}
+          data={this.state.status}
         />
       </div>
     );

@@ -13,10 +13,13 @@ export class ViewTable extends Component {
 
   row = rowData => {
     return (
-      <div className="flex justify-between w-100 h3 bb bw1 b--black-20 ph3">
+      <div
+        key={rowData.fixtureId}
+        className="flex justify-between w-100 h3 bb bw1 b--black-20 ph3"
+      >
         <div className="flex flex-column justify-center w-70">
           <div className="f4 b">{rowData.fixtureId}</div>
-          <div className="f5">Shelf 20 of Wine section</div>
+          <div className="f5">{rowData.description}</div>
         </div>
         <div className="flex flex-column justify-center w-30">
           <div className="tc f5 b">{rowData.count}</div>
@@ -35,15 +38,19 @@ export class ViewTable extends Component {
   };
 
   render() {
-    return (
-      <div className="flex flex-column w-100">
-        <div className="w-100 h2 flex items-center bg-light-gray bb b--black-20 ph3">
-          <div className="w-70 tc f5 b">Fixture</div>
-          <div className="w-30 tc f5 b">Status</div>
-        </div>
+    if (!Array.isArray(this.props.data) || this.props.data.length < 1) {
+      return <React.Fragment />;
+    } else {
+      return (
+        <div className="flex flex-column w-100">
+          <div className="w-100 h2 flex items-center bg-light-gray bb b--black-20 ph3">
+            <div className="w-70 tc f5 b">Fixture</div>
+            <div className="w-30 tc f5 b">Status</div>
+          </div>
 
-        <div className="flex flex-column">{this.rows(this.props.data)}</div>
-      </div>
-    );
+          <div className="flex flex-column">{this.rows(this.props.data)}</div>
+        </div>
+      );
+    }
   }
 }

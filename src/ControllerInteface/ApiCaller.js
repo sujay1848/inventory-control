@@ -1,5 +1,26 @@
 const URL = "http://3.134.88.218:3001/";
 const POST_SUBMISSION = URL + "submission";
+const GET_STATUS = URL + "status";
+
+export const getStatus = setStatus => {
+  fetch(GET_STATUS, {
+    method: "get",
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(res => {
+      if (res.status !== 200) {
+        throw new Error("Invalid response status");
+      }
+      return res.text();
+    })
+    .then(body => {
+      setStatus(JSON.parse(body));
+    })
+    .catch(err => {
+      console.log(err);
+      setStatus([]);
+    });
+};
 
 export const saveStocktake = (userId, fixtureId, stocks, success, fail) => {
   let stockArray = [];
