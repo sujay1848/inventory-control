@@ -1,15 +1,19 @@
-ersion: 2
+version: 2
 jobs:
   build:
     branches:
       only:
-        - development
+        - master
     docker:
       - image: circleci/node:9.9.0
     working_directory: ~/repo
 
     steps:
       - checkout
+
+      - add_ssh_keys:
+          fingerprints:
+            - "$SSH_KEY"
 
       # Download and cache dependencies
       - restore_cache:
@@ -18,7 +22,10 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install --ignore-engines
+      - run: npm install
+      - run: git config user.email "junrongy09@gmail.com"
+      - run: git config user.name "junrong09"
+      - run: npm run deploy
 
       - save_cache:
           paths:

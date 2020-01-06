@@ -20,3 +20,15 @@
 .App-link {
   color: #09d3ac;
 }
+
+.noLink {
+  text-Decoration: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+*:focus {
+  outline: none;
+}
