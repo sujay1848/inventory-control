@@ -1,21 +1,28 @@
 {
   "files": {
-    "main.css": "/inventory-control/static/css/main.3c783e41.chunk.css",
-    "main.js": "/inventory-control/static/js/main.c59b588d.chunk.js",
-    "main.js.map": "/inventory-control/static/js/main.c59b588d.chunk.js.map",
-    "runtime-main.js": "/inventory-control/static/js/runtime-main.50d8f16f.js",
-    "runtime-main.js.map": "/inventory-control/static/js/runtime-main.50d8f16f.js.map",
-    "static/js/2.45cd36d2.chunk.js": "/inventory-control/static/js/2.45cd36d2.chunk.js",
-    "static/js/2.45cd36d2.chunk.js.map": "/inventory-control/static/js/2.45cd36d2.chunk.js.map",
+    "main.css": "/inventory-control/static/css/main.44555aa0.chunk.css",
+    "main.js": "/inventory-control/static/js/main.0a007fd8.chunk.js",
+    "main.js.map": "/inventory-control/static/js/main.0a007fd8.chunk.js.map",
+    "runtime-main.js": "/inventory-control/static/js/runtime-main.7b35f343.js",
+    "runtime-main.js.map": "/inventory-control/static/js/runtime-main.7b35f343.js.map",
+    "static/css/2.eb45ad44.chunk.css": "/inventory-control/static/css/2.eb45ad44.chunk.css",
+    "static/js/2.820e4727.chunk.js": "/inventory-control/static/js/2.820e4727.chunk.js",
+    "static/js/2.820e4727.chunk.js.map": "/inventory-control/static/js/2.820e4727.chunk.js.map",
     "index.html": "/inventory-control/index.html",
-    "precache-manifest.204e2c4905fb3764b80c324abb4db7f8.js": "/inventory-control/precache-manifest.204e2c4905fb3764b80c324abb4db7f8.js",
+    "precache-manifest.f34ce4ad19d497c38f9f5bae61d41324.js": "/inventory-control/precache-manifest.f34ce4ad19d497c38f9f5bae61d41324.js",
     "service-worker.js": "/inventory-control/service-worker.js",
-    "static/css/main.3c783e41.chunk.css.map": "/inventory-control/static/css/main.3c783e41.chunk.css.map"
+    "static/css/2.eb45ad44.chunk.css.map": "/inventory-control/static/css/2.eb45ad44.chunk.css.map",
+    "static/css/main.44555aa0.chunk.css.map": "/inventory-control/static/css/main.44555aa0.chunk.css.map",
+    "static/js/2.820e4727.chunk.js.LICENSE": "/inventory-control/static/js/2.820e4727.chunk.js.LICENSE",
+    "static/media/barcode-light-blue.svg": "/inventory-control/static/media/barcode-light-blue.55775926.svg",
+    "static/media/barcode-white.svg": "/inventory-control/static/media/barcode-white.9f08b578.svg",
+    "static/media/magnifying-glass.svg": "/inventory-control/static/media/magnifying-glass.ed09bbc2.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.50d8f16f.js",
-    "static/js/2.45cd36d2.chunk.js",
-    "static/css/main.3c783e41.chunk.css",
-    "static/js/main.c59b588d.chunk.js"
+    "static/js/runtime-main.7b35f343.js",
+    "static/css/2.eb45ad44.chunk.css",
+    "static/js/2.820e4727.chunk.js",
+    "static/css/main.44555aa0.chunk.css",
+    "static/js/main.0a007fd8.chunk.js"
   ]
 }
